@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GeneratePasswordRequest;
 use App\Models\SpanishWord;
 use Illuminate\Http\Request;
 
@@ -43,20 +44,11 @@ class SpanishWordController extends Controller
             'total_added' => $totalAdded
         ]);
     }
-    public function generatePassword(Request $request): \Illuminate\Http\JsonResponse
+    public function generatePassword(GeneratePasswordRequest $request): \Illuminate\Http\JsonResponse
     {
-        $validatedData = $request->validate([
-            'count' => 'required|integer|min:1|max:20',
-            'delimiter' => 'nullable|string|max:5',
-        ]);
+        $words = SpanishWord::inRandomOrder()->take($request->count)->pluck('word');
 
-        $numberOfWords = $validatedData['count'];
-
-        $delimiter = $validatedData['delimiter'] ?? ' ';
-
-        $words = SpanishWord::inRandomOrder()->take($numberOfWords)->pluck('word');
-
-        $password = $words->implode($delimiter);
+        $password = $words->implode($request->delimiter);
 
         return response()->json([
             'status' => true,
