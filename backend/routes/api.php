@@ -6,4 +6,5 @@ use App\Http\Controllers\UserController;
 
 Route::controller(UserController::class)->group(function () {
     Route::post('/register', 'register');
+    Route::post('/login', 'login');
 });
