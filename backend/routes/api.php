@@ -11,5 +11,6 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(SpanishWordController::class)->group(function () {
-    Route::get('/words/spanish/upload', 'uploadWords');
+    Route::get('/es/words/upload', 'uploadWords');
+    Route::post('/es/password', 'generatePassword');
 });

@@ -43,4 +43,24 @@ class SpanishWordController extends Controller
             'total_added' => $totalAdded
         ]);
     }
+    public function generatePassword(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'count' => 'required|integer|min:1|max:20',
+            'delimiter' => 'nullable|string|max:5',
+        ]);
+
+        $numberOfWords = $validatedData['count'];
+
+        $delimiter = $validatedData['delimiter'] ?? ' ';
+
+        $words = SpanishWord::inRandomOrder()->take($numberOfWords)->pluck('word');
+
+        $password = $words->implode($delimiter);
+
+        return response()->json([
+            'status' => true,
+            'password' => $password,
+        ]);
+    }
 }
