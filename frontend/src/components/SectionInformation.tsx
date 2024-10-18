@@ -5,7 +5,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { useLanguageStore } from "@/store/languageStore";
-import { Dice3, Heart, Waves } from "lucide-react";
+import { Dice3, Heart, Shell, Star, Waves } from "lucide-react";
 
 export const SectionInformation = () => {
     const { isSpanish } = useLanguageStore();
@@ -35,7 +35,7 @@ export const SectionInformation = () => {
             <Card>
                 <CardHeader>
                     <div className="flex items-center">
-                        <Heart className="size-9 mr-3" />
+                        <Shell className="size-9 mr-3" />
                         <CardTitle>{isSpanish ? "Ventajas de usarlo" : "Advantages of Using It"}</CardTitle>
                     </div>
                 </CardHeader>
