@@ -5,7 +5,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { useLanguageStore } from "@/store/languageStore";
-import { Dice3, Heart, Shell, Star, Waves } from "lucide-react";
+import { Dice3, Shell, Waves } from "lucide-react";
 
 export const SectionInformation = () => {
     const { isSpanish } = useLanguageStore();
