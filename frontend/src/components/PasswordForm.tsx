@@ -38,10 +38,10 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChan
 						<SelectContent>
 							<SelectItem value="space">Espacio</SelectItem>
 							<SelectItem value="comma">Coma</SelectItem>
-							<SelectItem value="dash">Diagonal</SelectItem>
+							<SelectItem value="dash">Guion</SelectItem>
 							<SelectItem value="underscore">Guion Bajo</SelectItem>
 							<SelectItem value="period">Punto</SelectItem>
-							<SelectItem value="slash">Slash</SelectItem>
+							<SelectItem value="slash">Diagonal</SelectItem>
 							<SelectItem value="pipe">Pipe</SelectItem>
 							<SelectItem value="PascalCase">PascalCase</SelectItem>
 							<SelectItem value="camelCase">camelCase</SelectItem>

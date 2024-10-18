@@ -4,13 +4,16 @@ export interface FormValues {
     type: string;
 }
 
+export type HandleChangeType = (name: keyof FormValues, value: string | number) => void;
+
+
 export interface UseFormReturn {
     formData: FormValues;
-    handleChange: (name: keyof FormValues, value: string | number) => void;
-    setFormData: React.Dispatch<React.SetStateAction<FormValues>>;
+    handleChange: HandleChangeType
+    password: string
 }
 
 export interface PasswordFormProps {
     formData: FormValues;
-    handleChange: (name: keyof FormValues, value: string | number) => void;
+    handleChange: HandleChangeType
 }

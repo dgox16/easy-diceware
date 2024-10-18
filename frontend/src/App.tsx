@@ -1,11 +1,13 @@
 import { MainLayout } from "@/layouts/MainLayout.tsx";
 import { PasswordAnimate } from "@/components/PasswordAnimate.tsx";
 import { PasswordForm } from "@/components/PasswordForm.tsx";
-import { useForm } from "./hooks/useForm";
+import { usePassword } from "./hooks/usePassword";
 import { userLanguage } from "./hooks/useLanguage";
+import { PasswordSpace } from "./components/PasswordSpace";
+import { Toaster } from "@/components/ui/toaster"
 
 function App() {
-	const { formData, handleChange } = useForm({ count: 4, type: "space" })
+	const { formData, handleChange, password } = usePassword({ count: 4, type: "space" })
 	const { isSpanish } = userLanguage()
 
 	return (
@@ -23,9 +25,14 @@ function App() {
 						Fácil de recordar, imposible de hackear
 					</h2>
 				</div>
-				<PasswordAnimate />
+				{password ? (
+					<PasswordSpace password={password} />
+				) : (
+					<PasswordAnimate />
+				)}
 				<PasswordForm handleChange={handleChange} formData={formData} />
 			</div>
+			<Toaster />
 		</MainLayout>
 	);
 }
