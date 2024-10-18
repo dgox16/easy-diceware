@@ -15,12 +15,12 @@ const App = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex justify-center mt-32 flex-col">
+			<div className="flex justify-center mt-28 flex-col">
 				<div className="flex justify-center">
-					<h1 className="scroll-m-20 text-6xl font-black tracking-tight">
+					<h1 className="scroll-m-20 text-6xl mb-1 font-black tracking-tight">
 						{isSpanish
 							? "La clave es la simplicidad"
-							: "The key is the simplicity"
+							: "The key is simplicity"
 						}
 					</h1>
 				</div>
