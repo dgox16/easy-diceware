@@ -26,7 +26,7 @@ export const usePassword = (initialValues: FormValues): UseFormReturn => {
             if (data.status) {
                 setPassword(data.password)
                 toast({
-                    description: "Nueva contrasena creada.",
+                    description: "Nueva contraseña creada.",
                 })
             }
         }
