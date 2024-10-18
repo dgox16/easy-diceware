@@ -5,7 +5,7 @@ export const userLanguage = () => {
 
     useEffect(() => {
         const userLanguage = navigator.language;
-        setIsSpanish(userLanguage.startsWith("es"));
+        setIsSpanish(!userLanguage.startsWith("es"));
     }, []);
 
     return { isSpanish }

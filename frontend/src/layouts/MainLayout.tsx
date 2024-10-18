@@ -1,4 +1,4 @@
-import { Button, buttonVariants } from "@/components/ui/button.tsx";
+import { buttonVariants } from "@/components/ui/button.tsx";
 import { Github } from "lucide-react";
 import { ButtonToggleTheme } from "@/components/ButtonToggleTheme.tsx";
 import React, { ReactNode } from "react";
@@ -35,6 +35,18 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     {children}
                 </div>
             </main>
+            <footer>
+                <div className="flex justify-center mt-8">
+                    <div className=" w-recommend text-center">
+                        <p className="py-2 text-[12px] sm:text-[14px]">
+                            © 2024 Diego Armando Gómez Martínez.
+                            <span className="hidden sm:inline"> | </span>
+                            <br aria-hidden={true} className="block sm:hidden" />
+                            Casi todos los derechos reservados.
+                        </p>
+                    </div>
+                </div>
+            </footer>
         </>
     )
 };

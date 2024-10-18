@@ -53,7 +53,7 @@ export const SectionInformation = () => {
                 <CardHeader>
                     <div className="flex items-center">
                         <Waves className="size-9 mr-3" />
-                        <CardTitle>Easy Diceware</CardTitle>
+                        <CardTitle>EasyDiceware</CardTitle>
                     </div>
                 </CardHeader>
                 <CardContent>

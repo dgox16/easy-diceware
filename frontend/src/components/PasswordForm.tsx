@@ -9,13 +9,16 @@ import {
 import { Label } from "@/components/ui/label";
 import { PasswordFormProps } from "@/types/FormTypes";
 
-export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChange }) => {
+export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChange, isSpanish }) => {
 	return (
 		<div className="flex justify-center mt-10">
 			<div className="grid grid-cols-2 gap-8 w-[600px]">
 				<div className="flex-col flex text-center">
 					<Label htmlFor="numberWords" className="mb-5 font-semibold">
-						Tu contraseña tendra {formData.count} palabras
+						{isSpanish
+							? `Tu contraseña tendra ${formData.count} palabras:`
+							: `Your password will have ${formData.count} words:`
+						}
 					</Label>
 					<Slider
 						id="numberWords"
@@ -29,20 +32,23 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChan
 				</div>
 				<div className="flex-col flex text-center justify-center">
 					<Label htmlFor="numberWords" className="mb-5 font-semibold">
-						Elige como se va a separar tu contraseña
+						{isSpanish
+							? "Elige el separador de tu contraseña:"
+							: "Choose your password separator:"
+						}
 					</Label>
 					<Select onValueChange={(value) => handleChange("type", value)} >
 						<SelectTrigger className="">
-							<SelectValue placeholder="Selecciona tu delimitador" />
+							<SelectValue placeholder={isSpanish ? "Selecciona tu delimitador" : "Select your delimiter"} />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="space">Espacio</SelectItem>
-							<SelectItem value="comma">Coma</SelectItem>
-							<SelectItem value="dash">Guion</SelectItem>
-							<SelectItem value="underscore">Guion Bajo</SelectItem>
-							<SelectItem value="period">Punto</SelectItem>
-							<SelectItem value="slash">Diagonal</SelectItem>
-							<SelectItem value="pipe">Pipe</SelectItem>
+							<SelectItem value="space">{isSpanish ? "Espacio" : "Space"}</SelectItem>
+							<SelectItem value="comma">{isSpanish ? "Coma" : "Comma"}</SelectItem>
+							<SelectItem value="dash">{isSpanish ? "Guion" : "Dash"}</SelectItem>
+							<SelectItem value="underscore">{isSpanish ? "Guion Bajo" : "Underscore"}</SelectItem>
+							<SelectItem value="period">{isSpanish ? "Punto" : "Period"}</SelectItem>
+							<SelectItem value="slash">{isSpanish ? "Diagonal" : "Slash"}</SelectItem>
+							<SelectItem value="pipe">{isSpanish ? "Pipe" : "Pipe"}</SelectItem>
 							<SelectItem value="PascalCase">PascalCase</SelectItem>
 							<SelectItem value="camelCase">camelCase</SelectItem>
 						</SelectContent>

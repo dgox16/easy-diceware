@@ -23,7 +23,10 @@ function App() {
 				</div>
 				<div className="flex justify-center">
 					<h2 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-						Fácil de recordar, imposible de hackear
+						{isSpanish
+							? "Fácil de recordar, imposible de hackear"
+							: "Easy to remember, impossible to hack"
+						}
 					</h2>
 				</div>
 				{password ? (
@@ -31,7 +34,7 @@ function App() {
 				) : (
 					<PasswordAnimate />
 				)}
-				<PasswordForm handleChange={handleChange} formData={formData} />
+				<PasswordForm handleChange={handleChange} formData={formData} isSpanish={isSpanish} />
 			</div>
 			<SectionInformation />
 			<Toaster />

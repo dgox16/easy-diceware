@@ -16,4 +16,5 @@ export interface UseFormReturn {
 export interface PasswordFormProps {
     formData: FormValues;
     handleChange: HandleChangeType
+    isSpanish: boolean
 }
