@@ -1,19 +1,19 @@
 
-export interface FormValues {
+export interface PasswordRequest {
     count: number;
     type: string;
 }
 
-export type HandleChangeType = (name: keyof FormValues, value: string | number) => void;
+export type HandleChangeType = (name: keyof PasswordRequest, value: string | number) => void;
 
 
-export interface UseFormReturn {
-    formData: FormValues;
+export interface UsePasswordReturn {
+    formData: PasswordRequest;
     handleChange: HandleChangeType
     password: string
 }
 
 export interface PasswordFormProps {
-    formData: FormValues;
+    formData: PasswordRequest;
     handleChange: HandleChangeType
 }
