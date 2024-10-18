@@ -26,9 +26,9 @@ export const usePassword = (initialValues: PasswordRequest): UsePasswordReturn =
             const { data } = await axios.post("http://localhost:8000/es/password", formData)
             if (data.status) {
                 setPassword(data.password)
-                toast({
-                    description: isSpanish ? "Nueva contraseña creada." : "New password created.",
-                })
+                // toast({
+                //     description: isSpanish ? "Nueva contraseña creada." : "New password created.",
+                // })
             }
         }
         if (isFirstRender.current) {

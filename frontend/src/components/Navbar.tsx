@@ -5,7 +5,7 @@ import { ButtonToggleLanguage } from "@/components/ButtonToggleLanguage";
 
 export const Navbar = () => {
     return (
-        <nav className="flex justify-center items-center h-14">
+        <nav className="flex justify-center items-center h-14 mx-5 sm:mx-0">
             <div className="w-[1000px]">
                 <div className="flex justify-between items-center">
                     <h1 className="scroll-m-20 text-lg font-semibold tracking-tight">

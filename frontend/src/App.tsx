@@ -15,17 +15,17 @@ const App = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex justify-center mt-28 flex-col">
-				<div className="flex justify-center">
-					<h1 className="scroll-m-20 text-6xl mb-1 font-black tracking-tight">
+			<div className="flex justify-center mt-10 sm:mt-28 flex-col">
+				<div className="flex justify-center text-center">
+					<h1 className="scroll-m-20 text-[1.8rem] sm:text-6xl -mb-1 sm:mb-1 font-black tracking-tight">
 						{isSpanish
 							? "La clave es la simplicidad"
 							: "The key is simplicity"
 						}
 					</h1>
 				</div>
-				<div className="flex justify-center">
-					<h2 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+				<div className="flex justify-center text-center">
+					<h2 className="scroll-m-20 text-base sm:text-2xl font-semibold tracking-tight">
 						{isSpanish
 							? "Fácil de recordar, imposible de hackear"
 							: "Easy to remember, impossible to hack"

@@ -13,7 +13,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         <>
             <Navbar />
             <main className="flex justify-center">
-                <div className="w-[1000px]">
+                <div className="w-full sm:w-[1000px]">
                     {children}
                 </div>
             </main>

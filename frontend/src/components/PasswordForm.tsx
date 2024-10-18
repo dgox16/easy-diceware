@@ -14,10 +14,10 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChan
 	const { isSpanish } = useLanguageStore();
 
 	return (
-		<div className="flex justify-center mt-10">
+		<div className="flex justify-center mt-7 sm:mt-10 mx-5">
 			<div className="grid grid-cols-2 gap-8 w-[600px]">
-				<div className="flex-col flex text-center">
-					<Label htmlFor="numberWords" className="mb-5 font-semibold">
+				<div className="flex-col col-span-2 sm:col-span-1 flex text-center">
+					<Label htmlFor="numberWords" className="mb-2 sm:mb-5 font-semibold text-xs sm:text-base">
 						{isSpanish
 							? `Tu contraseña tendra ${formData.count} palabras:`
 							: `Your password will have ${formData.count} words:`
@@ -33,15 +33,15 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChan
 						onValueChange={(value) => handleChange("count", value[0])}
 					/>
 				</div>
-				<div className="flex-col flex text-center justify-center">
-					<Label htmlFor="numberWords" className="mb-5 font-semibold">
+				<div className="flex-col col-span-2 sm:col-span-1 sm:flex text-center justify-center">
+					<Label htmlFor="numberWords" className="mb-5 font-semibold text-xs sm:text-base">
 						{isSpanish
 							? "Elige el separador de tu contraseña:"
 							: "Choose your password separator:"
 						}
 					</Label>
-					<Select onValueChange={(value) => handleChange("type", value)} >
-						<SelectTrigger className="">
+					<Select onValueChange={(value) => handleChange("type", value)}>
+						<SelectTrigger className="mt-3 sm:mt-0">
 							<SelectValue placeholder={isSpanish ? "Selecciona tu delimitador" : "Select your delimiter"} />
 						</SelectTrigger>
 						<SelectContent>
