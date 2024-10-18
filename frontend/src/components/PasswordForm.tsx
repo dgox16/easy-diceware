@@ -7,17 +7,15 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { PasswordFormProps } from "@/types/FormTypes";
 
-export const PasswordForm = () => {
-	const [numberWords, setNumberWords] = useState<number[]>([4]);
-
+export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChange }) => {
 	return (
 		<div className="flex justify-center mt-10">
 			<div className="grid grid-cols-2 gap-8 w-[600px]">
 				<div className="flex-col flex text-center">
 					<Label htmlFor="numberWords" className="mb-5">
-						Tu contraseña tendra {numberWords} palabras
+						Tu contraseña tendra {formData.count} palabras
 					</Label>
 					<Slider
 						id="numberWords"
@@ -26,16 +24,16 @@ export const PasswordForm = () => {
 						min={3}
 						max={7}
 						step={1}
-						onValueChange={(value) => setNumberWords(value)}
+						onValueChange={(value) => handleChange("count", value[0])}
 					/>
 				</div>
 				<div className="flex-col flex text-center justify-center">
 					<Label htmlFor="numberWords" className="mb-5">
 						Elige como se va a separar tu contraseña
 					</Label>
-					<Select onValueChange={(value) => console.info(value)}>
+					<Select onValueChange={(value) => handleChange("type", value)} >
 						<SelectTrigger className="">
-							<SelectValue placeholder="Elige tu delimitador" />
+							<SelectValue placeholder="Selecciona tu delimitador" />
 						</SelectTrigger>
 						<SelectContent>
 							<SelectItem value="space">Espacio</SelectItem>

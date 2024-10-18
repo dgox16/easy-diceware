@@ -1,15 +1,12 @@
 import { MainLayout } from "@/layouts/MainLayout.tsx";
-import { useEffect, useState } from "react";
 import { PasswordAnimate } from "@/components/PasswordAnimate.tsx";
 import { PasswordForm } from "@/components/PasswordForm.tsx";
+import { useForm } from "./hooks/useForm";
+import { userLanguage } from "./hooks/useLanguage";
 
 function App() {
-	const [isSpanish, setIsSpanish] = useState(false);
-
-	useEffect(() => {
-		const userLanguage = navigator.language;
-		setIsSpanish(userLanguage.startsWith("es"));
-	}, []);
+	const { formData, handleChange } = useForm({ count: 4, type: "space" })
+	const { isSpanish } = userLanguage()
 
 	return (
 		<MainLayout>
@@ -27,7 +24,7 @@ function App() {
 					</h2>
 				</div>
 				<PasswordAnimate />
-				<PasswordForm />
+				<PasswordForm handleChange={handleChange} formData={formData} />
 			</div>
 		</MainLayout>
 	);
