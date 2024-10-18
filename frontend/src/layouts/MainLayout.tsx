@@ -1,13 +1,13 @@
-import {Button} from "@/components/ui/button.tsx";
-import {Github} from "lucide-react";
-import {ButtonToggleTheme} from "@/components/ButtonToggleTheme.tsx";
-import React, {ReactNode} from "react";
+import { Button, buttonVariants } from "@/components/ui/button.tsx";
+import { Github } from "lucide-react";
+import { ButtonToggleTheme } from "@/components/ButtonToggleTheme.tsx";
+import React, { ReactNode } from "react";
 
 interface MainLayoutProps {
     children: ReactNode;
 }
 
-export const MainLayout: React.FC<MainLayoutProps> = ({children}) => {
+export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return (
         <>
             <nav className="flex justify-center items-center h-14">
@@ -17,10 +17,15 @@ export const MainLayout: React.FC<MainLayoutProps> = ({children}) => {
                             EasyDiceware
                         </h1>
                         <div>
-                            <Button variant="outline" size="icon" className="mr-3">
-                                <Github className="size-4"/>
-                            </Button>
-                            <ButtonToggleTheme/>
+                            <a
+                                className={`${buttonVariants({ variant: "outline", size: "icon" })} mr-3`}
+                                href="https://github.com/dgox16/easy-diceware"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                <Github className="size-4" />
+                            </a>
+                            <ButtonToggleTheme />
                         </div>
                     </div>
                 </div>

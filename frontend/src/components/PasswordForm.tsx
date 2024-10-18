@@ -14,7 +14,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChan
 		<div className="flex justify-center mt-10">
 			<div className="grid grid-cols-2 gap-8 w-[600px]">
 				<div className="flex-col flex text-center">
-					<Label htmlFor="numberWords" className="mb-5">
+					<Label htmlFor="numberWords" className="mb-5 font-semibold">
 						Tu contraseña tendra {formData.count} palabras
 					</Label>
 					<Slider
@@ -22,13 +22,13 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChan
 						className="mt-4"
 						defaultValue={[4]}
 						min={3}
-						max={7}
+						max={6}
 						step={1}
 						onValueChange={(value) => handleChange("count", value[0])}
 					/>
 				</div>
 				<div className="flex-col flex text-center justify-center">
-					<Label htmlFor="numberWords" className="mb-5">
+					<Label htmlFor="numberWords" className="mb-5 font-semibold">
 						Elige como se va a separar tu contraseña
 					</Label>
 					<Select onValueChange={(value) => handleChange("type", value)} >
