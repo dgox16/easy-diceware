@@ -4,11 +4,12 @@ import { useToast } from "@/hooks/use-toast"
 
 
 import { useEffect, useRef, useState } from 'react';
+import { useLanguageStore } from '@/store/languageStore';
 
 
 export const usePassword = (initialValues: FormValues): UseFormReturn => {
     const { toast } = useToast()
-
+    const { isSpanish } = useLanguageStore();
     const [formData, setFormData] = useState<FormValues>(initialValues);
     const [password, setPassword] = useState("")
     const isFirstRender = useRef(true);
@@ -26,7 +27,7 @@ export const usePassword = (initialValues: FormValues): UseFormReturn => {
             if (data.status) {
                 setPassword(data.password)
                 toast({
-                    description: "Nueva contraseña creada.",
+                    description: isSpanish ? "Nueva contraseña creada." : "New password created.",
                 })
             }
         }

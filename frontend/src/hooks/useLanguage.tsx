@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useLanguageStore } from "@/store/languageStore";
+import { useEffect } from "react";
 
-export const userLanguage = () => {
-    const [isSpanish, setIsSpanish] = useState(false);
+export const useLanguage = () => {
+    const { changeLanguage } = useLanguageStore();
 
     useEffect(() => {
         const userLanguage = navigator.language;
-        setIsSpanish(!userLanguage.startsWith("es"));
+        changeLanguage(userLanguage.startsWith("es"));
     }, []);
-
-    return { isSpanish }
-
 }

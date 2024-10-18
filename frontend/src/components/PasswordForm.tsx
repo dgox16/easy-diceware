@@ -8,8 +8,11 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { PasswordFormProps } from "@/types/FormTypes";
+import { useLanguageStore } from "@/store/languageStore";
 
-export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChange, isSpanish }) => {
+export const PasswordForm: React.FC<PasswordFormProps> = ({ formData, handleChange }) => {
+	const { isSpanish } = useLanguageStore();
+
 	return (
 		<div className="flex justify-center mt-10">
 			<div className="grid grid-cols-2 gap-8 w-[600px]">

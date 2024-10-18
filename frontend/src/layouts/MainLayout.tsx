@@ -2,12 +2,15 @@ import { buttonVariants } from "@/components/ui/button.tsx";
 import { Github } from "lucide-react";
 import { ButtonToggleTheme } from "@/components/ButtonToggleTheme.tsx";
 import React, { ReactNode } from "react";
+import { useLanguageStore } from "@/store/languageStore";
 
 interface MainLayoutProps {
     children: ReactNode;
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+    const { isSpanish } = useLanguageStore();
+
     return (
         <>
             <nav className="flex justify-center items-center h-14">
@@ -42,7 +45,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                             © 2024 Diego Armando Gómez Martínez.
                             <span className="hidden sm:inline"> | </span>
                             <br aria-hidden={true} className="block sm:hidden" />
-                            Casi todos los derechos reservados.
+                            {isSpanish
+                                ? "Casi todos los derechos reservados."
+                                : "Almost all rights reserved."
+                            }
                         </p>
                     </div>
                 </div>
