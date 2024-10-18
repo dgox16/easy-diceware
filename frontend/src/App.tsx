@@ -5,6 +5,7 @@ import { usePassword } from "./hooks/usePassword";
 import { userLanguage } from "./hooks/useLanguage";
 import { PasswordSpace } from "./components/PasswordSpace";
 import { Toaster } from "@/components/ui/toaster"
+import { SectionInformation } from "./components/SectionInformation";
 
 function App() {
 	const { formData, handleChange, password } = usePassword({ count: 4, type: "space" })
@@ -32,8 +33,9 @@ function App() {
 				)}
 				<PasswordForm handleChange={handleChange} formData={formData} />
 			</div>
+			<SectionInformation />
 			<Toaster />
-		</MainLayout>
+		</MainLayout >
 	);
 }
 
