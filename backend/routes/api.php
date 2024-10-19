@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\EnglishWordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SpanishWordController;
@@ -13,4 +13,9 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(SpanishWordController::class)->group(function () {
     Route::get('/es/words/upload', 'uploadWords');
     Route::post('/es/password', 'generatePassword');
+});
+
+Route::controller(EnglishWordController::class)->group(function () {
+    Route::get('/en/words/upload', 'uploadWords');
+    Route::post('/en/password', 'generatePassword');
 });

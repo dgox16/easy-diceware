@@ -9,6 +9,7 @@
 .env
 api_requests.http
 words_spanish.txt
+words_english.txt
 .env.backup
 .env.production
 .phpactor.json
