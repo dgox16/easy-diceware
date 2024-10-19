@@ -48,7 +48,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
 							: "Choose your password separator:"}
 					</Label>
 					<Select onValueChange={(value) => handleChange("type", value)}>
-						<SelectTrigger className="mt-3 sm:mt-0 w-3/4 mx-auto sm:mx-0 sm:w-full">
+						<SelectTrigger className="text-sm sm:text-base mt-3 sm:mt-0 w-3/4 mx-auto sm:mx-0 sm:w-full">
 							<SelectValue
 								placeholder={
 									isSpanish
@@ -58,29 +58,33 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
 							/>
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="space">
+							<SelectItem className="text-xs sm:text-base" value="space">
 								{isSpanish ? "Espacio" : "Space"}
 							</SelectItem>
-							<SelectItem value="comma">
+							<SelectItem className="text-xs sm:text-base" value="comma">
 								{isSpanish ? "Coma" : "Comma"}
 							</SelectItem>
-							<SelectItem value="dash">
+							<SelectItem className="text-xs sm:text-base" value="dash">
 								{isSpanish ? "Guion" : "Dash"}
 							</SelectItem>
-							<SelectItem value="underscore">
+							<SelectItem className="text-xs sm:text-base" value="underscore">
 								{isSpanish ? "Guion Bajo" : "Underscore"}
 							</SelectItem>
-							<SelectItem value="period">
+							<SelectItem className="text-xs sm:text-base" value="period">
 								{isSpanish ? "Punto" : "Period"}
 							</SelectItem>
-							<SelectItem value="slash">
+							<SelectItem className="text-xs sm:text-base" value="slash">
 								{isSpanish ? "Diagonal" : "Slash"}
 							</SelectItem>
-							<SelectItem value="pipe">
+							<SelectItem className="text-xs sm:text-base" value="pipe">
 								{isSpanish ? "Pipe" : "Pipe"}
 							</SelectItem>
-							<SelectItem value="PascalCase">PascalCase</SelectItem>
-							<SelectItem value="camelCase">camelCase</SelectItem>
+							<SelectItem className="text-xs sm:text-base" value="PascalCase">
+								PascalCase
+							</SelectItem>
+							<SelectItem className="text-xs sm:text-base" value="camelCase">
+								camelCase
+							</SelectItem>
 						</SelectContent>
 					</Select>
 				</div>

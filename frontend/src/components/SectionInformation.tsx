@@ -6,12 +6,12 @@ export const SectionInformation = () => {
 	const { isSpanish } = useLanguageStore();
 
 	return (
-		<div className="grid grid-cols-2 gap-4 justify-center mt-14 sm:mt-24 mx-5 sm:mx-0">
+		<div className="grid grid-cols-2 gap-4 justify-center mt-10 sm:mt-24 mx-5 sm:mx-0">
 			<Card className="col-span-2 sm:col-span-1">
 				<CardHeader>
 					<div className="flex items-center">
 						<Dice3 className="size-6 sm:size-9 mr-3" />
-						<CardTitle className="text-lg sm:text-2xl">
+						<CardTitle className="text-xl sm:text-2xl">
 							{isSpanish ? "Método Diceware" : "Diceware Method"}
 						</CardTitle>
 					</div>
@@ -33,7 +33,7 @@ export const SectionInformation = () => {
 				<CardHeader>
 					<div className="flex items-center">
 						<Shell className="size-6 sm:size-9 mr-3" />
-						<CardTitle className="text-lg sm:text-2xl">
+						<CardTitle className="text-xl sm:text-2xl">
 							{isSpanish ? "Ventajas de usarlo" : "Advantages of Using It"}
 						</CardTitle>
 					</div>
@@ -62,7 +62,7 @@ export const SectionInformation = () => {
 				<CardHeader>
 					<div className="flex items-center">
 						<Waves className="size-6 sm:size-9 mr-3" />
-						<CardTitle className="text-lg sm:text-2xl">
+						<CardTitle className="text-xl sm:text-2xl">
 							{isSpanish ? "EasyDiceware" : "EasyDiceware"}
 						</CardTitle>
 					</div>
