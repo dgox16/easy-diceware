@@ -8,6 +8,7 @@
 /vendor
 .env
 api_requests.http
+words_spanish.txt
 .env.backup
 .env.production
 .phpactor.json
