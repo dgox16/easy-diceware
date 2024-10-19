@@ -27,9 +27,11 @@ class SpanishWordController extends Controller
             }
         }
 
+        $existingWords = SpanishWord::whereIn('word', array_keys($wordsSet))->pluck('word')->toArray();
+
         $data = [];
         foreach (array_keys($wordsSet) as $word) {
-            if (!SpanishWord::where('word', $word)->exists()) {
+            if (!in_array($word, $existingWords)) {
                 $data[] = ['word' => $word];
             }
         }
