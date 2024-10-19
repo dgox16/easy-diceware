@@ -18,7 +18,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
 
 	return (
 		<div className="flex justify-center mt-7 sm:mt-10 mx-5">
-			<div className="grid grid-cols-2 gap-8 w-[600px]">
+			<div className="grid grid-cols-2 gap-6 sm:gap-8 w-[600px]">
 				<div className="flex-col col-span-2 sm:col-span-1 flex text-center">
 					<Label
 						htmlFor="numberWords"

@@ -20,7 +20,7 @@ const App = () => {
 		<MainLayout>
 			<div className="flex justify-center mt-10 sm:mt-28 flex-col">
 				<div className="flex justify-center text-center">
-					<h1 className="scroll-m-20 text-[1.85rem] sm:text-6xl -mb-1 sm:mb-1 font-black tracking-tight">
+					<h1 className="scroll-m-20 text-[1.88rem] sm:text-6xl -mb-1 sm:mb-1 font-black tracking-tight">
 						{isSpanish ? "La clave es la simplicidad" : "The key is simplicity"}
 					</h1>
 				</div>
