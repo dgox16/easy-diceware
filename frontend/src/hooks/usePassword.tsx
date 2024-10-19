@@ -28,7 +28,7 @@ export const usePassword = (
 	useEffect(() => {
 		const getPassword = async () => {
 			const { data } = await axios.post(
-				`${import.meta.env.VITE_API_URL}/es/password`,
+				`${import.meta.env.VITE_API_URL}/${isSpanish ? "es" : "en"}/password`,
 				formData,
 			);
 			if (data.status) {
@@ -49,4 +49,3 @@ export const usePassword = (
 
 	return { formData, handleChange, password };
 };
-
