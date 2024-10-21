@@ -7,6 +7,7 @@ use App\Http\Requests\GeneratePasswordRequest;
 use App\Models\EnglishWord;
 use Illuminate\Http\Request;
 use Throwable;
+use ZxcvbnPhp\Zxcvbn;
 
 class EnglishWordController extends Controller
 {

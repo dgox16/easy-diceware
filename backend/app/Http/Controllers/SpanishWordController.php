@@ -7,6 +7,7 @@ use App\Models\SpanishWord;
 use Illuminate\Http\Request;
 use App\Helpers\PasswordHelper;
 use Throwable;
+use ZxcvbnPhp\Zxcvbn;
 
 class SpanishWordController extends Controller
 {
@@ -38,10 +39,12 @@ class SpanishWordController extends Controller
         try {
             $words = SpanishWord::inRandomOrder()->take($request->count)->pluck('word');
             $password = PasswordHelper::addDelimiters($words, $request->type);
+            $timeToCrack = PasswordHelper::calculateStrength($password, true);
 
             return response()->json([
                 'status' => true,
                 'password' => $password,
+                'time_to_crack' => $timeToCrack
             ]);
         } catch (Throwable $th) {
             return response()->json([
