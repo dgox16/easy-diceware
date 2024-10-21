@@ -2,6 +2,7 @@ import {
 	PasswordRequest,
 	HandleChangeType,
 	UsePasswordReturn,
+	PasswordResponse,
 } from "@/types/FormTypes";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
@@ -15,7 +16,10 @@ export const usePassword = (
 	const { toast } = useToast();
 	const { isSpanish } = useLanguageStore();
 	const [formData, setFormData] = useState<PasswordRequest>(initialValues);
-	const [password, setPassword] = useState("");
+	const [password, setPassword] = useState<PasswordResponse>({
+		password: "",
+		timeToCrack: "",
+	});
 	const isFirstRender = useRef(true);
 
 	const handleChange: HandleChangeType = (name, value) => {
@@ -31,8 +35,12 @@ export const usePassword = (
 				`${import.meta.env.VITE_API_URL}/${isSpanish ? "es" : "en"}/password`,
 				formData,
 			);
+			console.log(data);
 			if (data.status) {
-				setPassword(data.password);
+				setPassword({
+					password: data.password,
+					timeToCrack: data.timeToCrack,
+				});
 				toast({
 					description: isSpanish
 						? "Nueva contraseña creada."

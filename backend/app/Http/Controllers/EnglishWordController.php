@@ -28,7 +28,7 @@ class EnglishWordController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Words uploaded successfully',
-                'total_added' => $totalAdded
+                'totalAdded' => $totalAdded
             ]);
         } catch (Throwable $th) {
             return response()->json([
@@ -43,10 +43,12 @@ class EnglishWordController extends Controller
         try {
             $words = EnglishWord::inRandomOrder()->take($request->count)->pluck('word');
             $password = PasswordHelper::addDelimiters($words, $request->type);
+            $timeToCrack = PasswordHelper::calculateStrength($password, true);
 
             return response()->json([
                 'status' => true,
                 'password' => $password,
+                'timeToCrack' => $timeToCrack
             ]);
         } catch (Throwable $th) {
             return response()->json([

@@ -31,7 +31,11 @@ const App = () => {
 							: "Easy to remember, impossible to hack"}
 					</h2>
 				</div>
-				{password ? <PasswordViewer password={password} /> : <PasswordAnimate />}
+				{password.password !== "" ? (
+					<PasswordViewer password={password} />
+				) : (
+					<PasswordAnimate />
+				)}
 				<PasswordForm handleChange={handleChange} formData={formData} />
 			</div>
 			<SectionInformation />

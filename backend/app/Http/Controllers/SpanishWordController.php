@@ -44,7 +44,7 @@ class SpanishWordController extends Controller
             return response()->json([
                 'status' => true,
                 'password' => $password,
-                'time_to_crack' => $timeToCrack
+                'timeToCrack' => $timeToCrack
             ]);
         } catch (Throwable $th) {
             return response()->json([
