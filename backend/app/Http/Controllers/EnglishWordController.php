@@ -6,34 +6,52 @@ use App\Helpers\PasswordHelper;
 use App\Http\Requests\GeneratePasswordRequest;
 use App\Models\EnglishWord;
 use Illuminate\Http\Request;
+use Throwable;
 
 class EnglishWordController extends Controller
 {
     public function uploadWords(Request $request): \Illuminate\Http\JsonResponse
     {
+        try {
+            $data = PasswordHelper::readFile('words_english.txt', false);
+            $totalAdded = count($data);
 
-        $data = PasswordHelper::readFile('words_english.txt', false);
+            if ($totalAdded == 0) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'All the words are already in our database',
+                ]);
+            }
 
-        $totalAdded = count($data);
-        if ($totalAdded > 0) {
             EnglishWord::insert($data);
+            return response()->json([
+                'status' => true,
+                'message' => 'Words uploaded successfully',
+                'total_added' => $totalAdded
+            ]);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong'
+            ], 500);
         }
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Words uploaded successfully',
-            'total_added' => $totalAdded
-        ]);
     }
 
     public function generatePassword(GeneratePasswordRequest $request): \Illuminate\Http\JsonResponse
     {
-        $words = EnglishWord::inRandomOrder()->take($request->count)->pluck('word');
-        $password = PasswordHelper::addDelimiters($words, $request->type);
+        try {
+            $words = EnglishWord::inRandomOrder()->take($request->count)->pluck('word');
+            $password = PasswordHelper::addDelimiters($words, $request->type);
 
-        return response()->json([
-            'status' => true,
-            'password' => $password,
-        ]);
+            return response()->json([
+                'status' => true,
+                'password' => $password,
+            ]);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong'
+            ], 500);
+        }
     }
 }
