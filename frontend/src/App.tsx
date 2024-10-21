@@ -1,12 +1,12 @@
 import { MainLayout } from "@/layouts/MainLayout.tsx";
-import { PasswordAnimate } from "@/components/PasswordAnimate.tsx";
-import { PasswordForm } from "@/components/PasswordForm.tsx";
+import { PasswordAnimate } from "@/components/password/PasswordAnimate";
+import { PasswordForm } from "@/components/password/PasswordForm";
 import { usePassword } from "./hooks/usePassword";
-import { PasswordSpace } from "./components/PasswordSpace";
 import { Toaster } from "@/components/ui/toaster";
 import { SectionInformation } from "./components/SectionInformation";
 import { useLanguageStore } from "./store/languageStore";
 import { useLanguage } from "./hooks/useLanguage";
+import { PasswordViewer } from "./components/password/PasswordViewer";
 
 const App = () => {
 	useLanguage();
@@ -31,7 +31,7 @@ const App = () => {
 							: "Easy to remember, impossible to hack"}
 					</h2>
 				</div>
-				{password ? <PasswordSpace password={password} /> : <PasswordAnimate />}
+				{password ? <PasswordViewer password={password} /> : <PasswordAnimate />}
 				<PasswordForm handleChange={handleChange} formData={formData} />
 			</div>
 			<SectionInformation />

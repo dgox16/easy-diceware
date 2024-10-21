@@ -11,30 +11,8 @@ class EnglishWordController extends Controller
 {
     public function uploadWords(Request $request): \Illuminate\Http\JsonResponse
     {
-        $filePath = base_path('words_english.txt');
 
-        if (!file_exists($filePath)) {
-            return response()->json(['status' => false, 'message' => 'File not found'], 404);
-        }
-
-        $wordsSet = [];
-        $fileContents = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-        foreach ($fileContents as $line) {
-            $word = trim($line);
-            if (!empty($word)) {
-                $wordsSet[$word] = true;
-            }
-        }
-
-        $existingWords = EnglishWord::whereIn('word', array_keys($wordsSet))->pluck('word')->toArray();
-
-        $data = [];
-        foreach (array_keys($wordsSet) as $word) {
-            if (!in_array($word, $existingWords)) {
-                $data[] = ['word' => $word];
-            }
-        }
+        $data = PasswordHelper::readFile('words_english.txt', false);
 
         $totalAdded = count($data);
         if ($totalAdded > 0) {

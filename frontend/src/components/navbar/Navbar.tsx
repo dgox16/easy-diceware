@@ -1,7 +1,7 @@
 import { buttonVariants } from "@/components/ui/button.tsx";
 import { Github } from "lucide-react";
-import { ButtonToggleTheme } from "@/components/ButtonToggleTheme.tsx";
-import { ButtonToggleLanguage } from "@/components/ButtonToggleLanguage";
+import { ButtonToggleTheme } from "@/components/navbar/ButtonToggleTheme";
+import { ButtonToggleLanguage } from "@/components/navbar/ButtonToggleLanguage";
 
 export const Navbar = () => {
     return (

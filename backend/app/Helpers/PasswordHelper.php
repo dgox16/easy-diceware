@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Helpers;
 
 
 use App\Enums\TypePassword;
+use App\Models\EnglishWord;
+use App\Models\SpanishWord;
 
 class PasswordHelper
 {
@@ -25,5 +28,38 @@ class PasswordHelper
             })->implode(''),
             default => $words->implode(' '),
         };
+    }
+    public static function readFile($path, $isSpanish)
+    {
+        $filePath = base_path($path);
+
+        if (!file_exists($filePath)) {
+            return response()->json(['status' => false, 'message' => 'File not found'], 404);
+        }
+
+        $wordsSet = [];
+        $fileContents = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        foreach ($fileContents as $line) {
+            $word = trim($line);
+            if (!empty($word)) {
+                $wordsSet[$word] = true;
+            }
+        }
+
+        if ($isSpanish) {
+            $existingWords = SpanishWord::whereIn('word', array_keys($wordsSet))->pluck('word')->toArray();
+        } else {
+            $existingWords = EnglishWord::whereIn('word', array_keys($wordsSet))->pluck('word')->toArray();
+        }
+
+        $data = [];
+        foreach (array_keys($wordsSet) as $word) {
+            if (!in_array($word, $existingWords)) {
+                $data[] = ['word' => $word];
+            }
+        }
+
+        return $data;
     }
 }

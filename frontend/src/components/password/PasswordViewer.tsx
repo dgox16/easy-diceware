@@ -1,5 +1,5 @@
 
-export const PasswordSpace: React.FC<{ password: string }> = ({ password }) => {
+export const PasswordViewer: React.FC<{ password: string }> = ({ password }) => {
     return (
         <div className="flex justify-center mt-5 mx-5 sm:mx-0">
             <div

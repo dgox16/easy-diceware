@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { useLanguageStore } from "@/store/languageStore";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/navbar/Navbar";
 
 interface MainLayoutProps {
     children: ReactNode;
