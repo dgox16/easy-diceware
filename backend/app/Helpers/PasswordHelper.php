@@ -29,6 +29,7 @@ class PasswordHelper
             default => $words->implode(' '),
         };
     }
+
     public static function readFile($path, $isSpanish)
     {
         $filePath = base_path($path);
