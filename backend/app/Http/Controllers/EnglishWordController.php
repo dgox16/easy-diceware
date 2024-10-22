@@ -43,7 +43,7 @@ class EnglishWordController extends Controller
         try {
             $words = EnglishWord::inRandomOrder()->take($request->count)->pluck('word');
             $password = PasswordHelper::addDelimiters($words, $request->type);
-            $timeToCrack = PasswordHelper::calculateStrength($password, true);
+            $timeToCrack = PasswordHelper::calculateStrength($password, false);
 
             return response()->json([
                 'status' => true,
