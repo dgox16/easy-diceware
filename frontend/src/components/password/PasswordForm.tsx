@@ -31,6 +31,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
 					<Slider
 						id="numberWords"
 						className="mt-2 sm:mt-4 w-3/4 mx-auto sm:mx-0 sm:w-full"
+						aria-label="Choose a value"
 						defaultValue={[4]}
 						min={3}
 						max={6}
@@ -40,7 +41,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
 				</div>
 				<div className="flex-col col-span-2 sm:col-span-1 sm:flex text-center justify-center">
 					<Label
-						htmlFor="numberWords"
+						htmlFor="typePassword"
 						className="mb-5 font-semibold text-xs sm:text-base"
 					>
 						{isSpanish
@@ -48,7 +49,10 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
 							: "Choose your password separator:"}
 					</Label>
 					<Select onValueChange={(value) => handleChange("type", value)}>
-						<SelectTrigger className="text-sm sm:text-base mt-3 sm:mt-0 w-3/4 mx-auto sm:mx-0 sm:w-full">
+						<SelectTrigger
+							className="text-sm sm:text-base mt-3 sm:mt-0 w-3/4 mx-auto sm:mx-0 sm:w-full"
+							aria-label="typePassword"
+						>
 							<SelectValue
 								placeholder={
 									isSpanish
