@@ -5,15 +5,12 @@ import {
 	PasswordResponse,
 } from "@/types/FormTypes";
 import axios from "axios";
-import { useToast } from "@/hooks/use-toast";
-
 import { useEffect, useRef, useState } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 
 export const usePassword = (
 	initialValues: PasswordRequest,
 ): UsePasswordReturn => {
-	const { toast } = useToast();
 	const { isSpanish } = useLanguageStore();
 	const [formData, setFormData] = useState<PasswordRequest>(initialValues);
 	const [password, setPassword] = useState<PasswordResponse>({
@@ -40,11 +37,6 @@ export const usePassword = (
 				setPassword({
 					password: data.password,
 					timeToCrack: data.timeToCrack,
-				});
-				toast({
-					description: isSpanish
-						? "Nueva contraseña creada."
-						: "New password created.",
 				});
 			}
 		};

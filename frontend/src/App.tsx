@@ -2,7 +2,6 @@ import { MainLayout } from "@/layouts/MainLayout.tsx";
 import { PasswordAnimate } from "@/components/password/PasswordAnimate";
 import { PasswordForm } from "@/components/password/PasswordForm";
 import { usePassword } from "./hooks/usePassword";
-import { Toaster } from "@/components/ui/toaster";
 import { SectionInformation } from "./components/SectionInformation";
 import { useLanguageStore } from "./store/languageStore";
 import { useLanguage } from "./hooks/useLanguage";
@@ -39,7 +38,6 @@ const App = () => {
 				<PasswordForm handleChange={handleChange} formData={formData} />
 			</div>
 			<SectionInformation />
-			<Toaster />
 		</MainLayout>
 	);
 };
