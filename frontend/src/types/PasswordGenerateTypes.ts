@@ -1,6 +1,7 @@
-export interface PasswordGenerateForm {
+export interface PasswordGenerateRequest {
 	count: number;
 	type: string;
+	isSpanish: boolean;
 }
 
 export interface PasswordGenerateResponse {
@@ -9,23 +10,7 @@ export interface PasswordGenerateResponse {
 	timeToCrack: string;
 }
 
-export interface PasswordGenerateRequest {
-	formData: PasswordGenerateForm;
-	isSpanish: boolean;
-}
-
-export type HandleChangePasswordGenerateType = (
-	name: keyof PasswordGenerateForm,
-	value: string | number,
+export type ChangePasswordGenerateType = (
+	name: keyof PasswordGenerateRequest,
+	value: string | number | boolean,
 ) => void;
-
-export interface UsePasswordGenerateReturn {
-	formData: PasswordGenerateForm;
-	handleChange: HandleChangePasswordGenerateType;
-	password: PasswordGenerateResponse;
-}
-
-export interface PasswordGenerateFormProps {
-	formData: PasswordGenerateForm;
-	handleChange: HandleChangePasswordGenerateType;
-}

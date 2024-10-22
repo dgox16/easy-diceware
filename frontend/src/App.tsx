@@ -9,11 +9,8 @@ import { useGeneratePassword } from "./hooks/useGeneratePassword";
 
 const App = () => {
 	useLanguage();
-	const { formData, handleChange, password } = useGeneratePassword({
-		count: 4,
-		type: "space",
-	});
 	const { isSpanish } = useLanguageStore();
+	const password = useGeneratePassword();
 
 	return (
 		<MainLayout>
@@ -35,7 +32,7 @@ const App = () => {
 				) : (
 					<PasswordAnimate />
 				)}
-				<PasswordForm handleChange={handleChange} formData={formData} />
+				<PasswordForm />
 			</div>
 			<SectionInformation />
 		</MainLayout>

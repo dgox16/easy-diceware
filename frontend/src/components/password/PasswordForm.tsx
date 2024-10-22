@@ -7,13 +7,12 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { PasswordGenerateFormProps } from "@/types/PasswordGenerateTypes";
 import { useLanguageStore } from "@/store/languageStore";
+import { useGeneratePasswordStore } from "@/store/generatePasswordStore";
 
-export const PasswordForm: React.FC<PasswordGenerateFormProps> = ({
-	formData,
-	handleChange,
-}) => {
+export const PasswordForm = () => {
+	const { formGeneratePassword, changeFormGeneratePassword } =
+		useGeneratePasswordStore();
 	const { isSpanish } = useLanguageStore();
 
 	return (
@@ -25,8 +24,8 @@ export const PasswordForm: React.FC<PasswordGenerateFormProps> = ({
 						className="mb-2 sm:mb-5 font-semibold text-xs sm:text-base"
 					>
 						{isSpanish
-							? `Tu contraseña tendra ${formData.count} palabras:`
-							: `Your password will have ${formData.count} words:`}
+							? `Tu contraseña tendra ${formGeneratePassword.count} palabras:`
+							: `Your password will have ${formGeneratePassword.count} words:`}
 					</Label>
 					<Slider
 						id="numberWords"
@@ -36,7 +35,9 @@ export const PasswordForm: React.FC<PasswordGenerateFormProps> = ({
 						min={3}
 						max={6}
 						step={1}
-						onValueChange={(value) => handleChange("count", value[0])}
+						onValueChange={(value) =>
+							changeFormGeneratePassword("count", value[0])
+						}
 					/>
 				</div>
 				<div className="flex-col col-span-2 sm:col-span-1 sm:flex text-center justify-center">
@@ -48,7 +49,9 @@ export const PasswordForm: React.FC<PasswordGenerateFormProps> = ({
 							? "Elige el separador de tu contraseña:"
 							: "Choose your password separator:"}
 					</Label>
-					<Select onValueChange={(value) => handleChange("type", value)}>
+					<Select
+						onValueChange={(value) => changeFormGeneratePassword("type", value)}
+					>
 						<SelectTrigger
 							className="text-sm sm:text-base mt-3 sm:mt-0 w-3/4 mx-auto sm:mx-0 sm:w-full"
 							aria-label="typePassword"

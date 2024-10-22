@@ -1,18 +1,10 @@
-import {
-	PasswordGenerateResponse,
-	PasswordGenerateForm,
-	HandleChangePasswordGenerateType,
-	UsePasswordGenerateReturn,
-} from "@/types/PasswordGenerateTypes";
+import { PasswordGenerateResponse } from "@/types/PasswordGenerateTypes";
 import { useEffect, useRef, useState } from "react";
-import { useLanguageStore } from "@/store/languageStore";
 import { generatePasswordRequest } from "@/services/passwordRequest";
+import { useGeneratePasswordStore } from "@/store/generatePasswordStore";
 
-export const useGeneratePassword = (
-	initialValues: PasswordGenerateForm,
-): UsePasswordGenerateReturn => {
-	const { isSpanish } = useLanguageStore();
-	const [formData, setFormData] = useState<PasswordGenerateForm>(initialValues);
+export const useGeneratePassword = (): PasswordGenerateResponse => {
+	const { formGeneratePassword } = useGeneratePasswordStore();
 	const [password, setPassword] = useState<PasswordGenerateResponse>({
 		password: "",
 		timeToCrack: "",
@@ -20,16 +12,9 @@ export const useGeneratePassword = (
 	});
 	const isFirstRender = useRef(true);
 
-	const handleChange: HandleChangePasswordGenerateType = (name, value) => {
-		setFormData((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
-
 	useEffect(() => {
 		const getPassword = async () => {
-			const response = await generatePasswordRequest({ formData, isSpanish });
+			const response = await generatePasswordRequest(formGeneratePassword);
 			if (response.status) {
 				setPassword(response);
 			}
@@ -39,7 +24,7 @@ export const useGeneratePassword = (
 			return;
 		}
 		getPassword();
-	}, [formData]);
+	}, [formGeneratePassword]);
 
-	return { formData, handleChange, password };
+	return password;
 };

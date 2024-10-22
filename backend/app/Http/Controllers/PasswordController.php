@@ -6,11 +6,12 @@ use App\Helpers\PasswordHelper;
 use App\Http\Requests\CheckPasswordRequest;
 use App\Http\Requests\GeneratePasswordRequest;
 use App\Models\EnglishWord;
+use App\Models\SpanishWord;
 use Illuminate\Http\Request;
 use Throwable;
 use Illuminate\Http\JsonResponse;
 
-class EnglishWordController extends Controller
+class PasswordController extends Controller
 {
     public function uploadWords(Request $request): JsonResponse
     {
@@ -42,9 +43,13 @@ class EnglishWordController extends Controller
     public function generatePassword(GeneratePasswordRequest $request): JsonResponse
     {
         try {
-            $words = EnglishWord::inRandomOrder()->take($request->count)->pluck('word');
+            if ($request->isSpanish) {
+                $words = SpanishWord::inRandomOrder()->take($request->count)->pluck('word');
+            } else {
+                $words = EnglishWord::inRandomOrder()->take($request->count)->pluck('word');
+            }
             $password = PasswordHelper::addDelimiters($words, $request->type);
-            $timeToCrack = PasswordHelper::calculateStrength($password, false);
+            $timeToCrack = PasswordHelper::calculateStrength($password, $request->isSpanish);
 
             return response()->json([
                 'status' => true,
@@ -54,7 +59,7 @@ class EnglishWordController extends Controller
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'Something went wrong'
+                'message' => $th
             ], 500);
         }
     }
@@ -62,7 +67,7 @@ class EnglishWordController extends Controller
     public function checkPassword(CheckPasswordRequest $request): JsonResponse
     {
         try {
-            $timeToCrack = PasswordHelper::calculateStrength($request->password, false);
+            $timeToCrack = PasswordHelper::calculateStrength($request->password, $request->isSpanish);
 
             return response()->json([
                 'status' => true,
