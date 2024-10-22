@@ -122,8 +122,8 @@ class PasswordHelper
 
         $units = [
             'millions' => [
-                'singular' => $isSpanish ? 'millón' : 'million',
-                'plural' => $isSpanish ? 'millones' : 'millions',
+                'singular' => $isSpanish ? 'millón de años' : 'million of years',
+                'plural' => $isSpanish ? 'millones de años' : 'millions of years',
                 'divider' => 1e6
             ],
             'years' => [
