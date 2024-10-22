@@ -6,12 +6,12 @@ use App\Http\Requests\GeneratePasswordRequest;
 use App\Models\SpanishWord;
 use Illuminate\Http\Request;
 use App\Helpers\PasswordHelper;
+use Illuminate\Http\JsonResponse;
 use Throwable;
-use ZxcvbnPhp\Zxcvbn;
 
 class SpanishWordController extends Controller
 {
-    public function uploadWords(Request $request): \Illuminate\Http\JsonResponse
+    public function uploadWords(Request $request): JsonResponse
     {
         try {
             $data = PasswordHelper::readFile('words_spanish.txt', true);
@@ -34,7 +34,7 @@ class SpanishWordController extends Controller
         }
     }
 
-    public function generatePassword(GeneratePasswordRequest $request): \Illuminate\Http\JsonResponse
+    public function generatePassword(GeneratePasswordRequest $request): JsonResponse
     {
         try {
             $words = SpanishWord::inRandomOrder()->take($request->count)->pluck('word');
