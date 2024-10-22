@@ -1,8 +1,10 @@
-import {
-	ChangePasswordGenerateType,
-	PasswordGenerateRequest,
-} from "@/types/PasswordGenerateTypes";
+import { PasswordGenerateRequest } from "@/types/PasswordGenerateTypes";
 import { create } from "zustand";
+
+type ChangePasswordGenerateType = (
+	name: keyof PasswordGenerateRequest,
+	value: string | number | boolean,
+) => void;
 
 interface GeneratePasswordState {
 	formGeneratePassword: PasswordGenerateRequest;

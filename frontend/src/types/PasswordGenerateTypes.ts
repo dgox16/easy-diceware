@@ -9,8 +9,3 @@ export interface PasswordGenerateResponse {
 	password: string;
 	timeToCrack: string;
 }
-
-export type ChangePasswordGenerateType = (
-	name: keyof PasswordGenerateRequest,
-	value: string | number | boolean,
-) => void;

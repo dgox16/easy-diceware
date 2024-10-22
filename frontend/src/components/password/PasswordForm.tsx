@@ -32,7 +32,7 @@ export const PasswordForm = () => {
 						className="mt-2 sm:mt-4 w-3/4 mx-auto sm:mx-0 sm:w-full"
 						aria-label="Choose a value"
 						defaultValue={[4]}
-						min={3}
+						min={2}
 						max={6}
 						step={1}
 						onValueChange={(value) =>
