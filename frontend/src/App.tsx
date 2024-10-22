@@ -1,15 +1,15 @@
 import { MainLayout } from "@/layouts/MainLayout.tsx";
 import { PasswordAnimate } from "@/components/password/PasswordAnimate";
 import { PasswordForm } from "@/components/password/PasswordForm";
-import { usePassword } from "./hooks/usePassword";
 import { SectionInformation } from "./components/SectionInformation";
 import { useLanguageStore } from "./store/languageStore";
 import { useLanguage } from "./hooks/useLanguage";
 import { PasswordViewer } from "./components/password/PasswordViewer";
+import { useGeneratePassword } from "./hooks/useGeneratePassword";
 
 const App = () => {
 	useLanguage();
-	const { formData, handleChange, password } = usePassword({
+	const { formData, handleChange, password } = useGeneratePassword({
 		count: 4,
 		type: "space",
 	});
@@ -30,7 +30,7 @@ const App = () => {
 							: "Easy to remember, impossible to hack"}
 					</h2>
 				</div>
-				{password.password !== "" ? (
+				{password.status ? (
 					<PasswordViewer password={password} />
 				) : (
 					<PasswordAnimate />

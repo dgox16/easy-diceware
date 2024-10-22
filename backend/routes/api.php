@@ -12,10 +12,10 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(SpanishWordController::class)->group(function () {
     Route::get('/es/words/upload', 'uploadWords');
-    Route::post('/es/password', 'generatePassword');
+    Route::post('/es/password/generate', 'generatePassword');
 });
 
 Route::controller(EnglishWordController::class)->group(function () {
     Route::get('/en/words/upload', 'uploadWords');
-    Route::post('/en/password', 'generatePassword');
+    Route::post('/en/password/generate', 'generatePassword');
 });

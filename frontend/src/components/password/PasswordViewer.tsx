@@ -1,9 +1,9 @@
 import { useLanguageStore } from "@/store/languageStore";
-import { PasswordResponse } from "@/types/FormTypes";
+import { PasswordGenerateResponse } from "@/types/PasswordGenerateTypes";
 
-export const PasswordViewer: React.FC<{ password: PasswordResponse }> = ({
-	password,
-}) => {
+export const PasswordViewer: React.FC<{
+	password: PasswordGenerateResponse;
+}> = ({ password }) => {
 	const { isSpanish } = useLanguageStore();
 
 	return (

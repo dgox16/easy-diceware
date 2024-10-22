@@ -7,10 +7,10 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { PasswordFormProps } from "@/types/FormTypes";
+import { PasswordGenerateFormProps } from "@/types/PasswordGenerateTypes";
 import { useLanguageStore } from "@/store/languageStore";
 
-export const PasswordForm: React.FC<PasswordFormProps> = ({
+export const PasswordForm: React.FC<PasswordGenerateFormProps> = ({
 	formData,
 	handleChange,
 }) => {
