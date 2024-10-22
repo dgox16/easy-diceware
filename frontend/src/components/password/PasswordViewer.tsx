@@ -16,7 +16,7 @@ export const PasswordViewer: React.FC<{ password: PasswordResponse }> = ({
 					? "Una computadora tardaría aproximadamente"
 					: "It would take a computer about"}{" "}
 			</span>
-			<span className="mx-auto my-1 text-xl sm:text-3xl font-bold">
+			<span className="mx-auto my-0 sm:my-1 text-xl sm:text-3xl font-bold">
 				{password.timeToCrack}
 			</span>
 			<span className="mx-auto text-sm sm:text-base">
