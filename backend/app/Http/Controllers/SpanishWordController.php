@@ -6,6 +6,7 @@ use App\Http\Requests\GeneratePasswordRequest;
 use App\Models\SpanishWord;
 use Illuminate\Http\Request;
 use App\Helpers\PasswordHelper;
+use App\Http\Requests\CheckPasswordRequest;
 use Illuminate\Http\JsonResponse;
 use Throwable;
 
@@ -44,6 +45,23 @@ class SpanishWordController extends Controller
             return response()->json([
                 'status' => true,
                 'password' => $password,
+                'timeToCrack' => $timeToCrack
+            ]);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function checkPassword(CheckPasswordRequest $request): JsonResponse
+    {
+        try {
+            $timeToCrack = PasswordHelper::calculateStrength($request->password, true);
+
+            return response()->json([
+                'status' => true,
                 'timeToCrack' => $timeToCrack
             ]);
         } catch (Throwable $th) {

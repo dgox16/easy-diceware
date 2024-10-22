@@ -13,6 +13,7 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(SpanishWordController::class)->group(function () {
     Route::get('/es/words/upload', 'uploadWords');
     Route::post('/es/password/generate', 'generatePassword');
+    Route::post('/es/password/check', 'checkPassword');
 });
 
 Route::controller(EnglishWordController::class)->group(function () {
