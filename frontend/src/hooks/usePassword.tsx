@@ -32,7 +32,6 @@ export const usePassword = (
 				`${import.meta.env.VITE_API_URL}/${isSpanish ? "es" : "en"}/password`,
 				formData,
 			);
-			console.log(data);
 			if (data.status) {
 				setPassword({
 					password: data.password,
