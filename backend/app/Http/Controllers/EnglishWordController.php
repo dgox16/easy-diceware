@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PasswordHelper;
+use App\Http\Requests\CheckPasswordRequest;
 use App\Http\Requests\GeneratePasswordRequest;
 use App\Models\EnglishWord;
 use Illuminate\Http\Request;
@@ -48,6 +49,23 @@ class EnglishWordController extends Controller
             return response()->json([
                 'status' => true,
                 'password' => $password,
+                'timeToCrack' => $timeToCrack
+            ]);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function checkPassword(CheckPasswordRequest $request): JsonResponse
+    {
+        try {
+            $timeToCrack = PasswordHelper::calculateStrength($request->password, false);
+
+            return response()->json([
+                'status' => true,
                 'timeToCrack' => $timeToCrack
             ]);
         } catch (Throwable $th) {

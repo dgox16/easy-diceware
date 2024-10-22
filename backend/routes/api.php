@@ -19,4 +19,5 @@ Route::controller(SpanishWordController::class)->group(function () {
 Route::controller(EnglishWordController::class)->group(function () {
     Route::get('/en/words/upload', 'uploadWords');
     Route::post('/en/password/generate', 'generatePassword');
+    Route::post('/en/password/check', 'checkPassword');
 });
