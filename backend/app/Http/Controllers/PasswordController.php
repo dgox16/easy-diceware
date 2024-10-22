@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\PasswordHelper;
 use App\Http\Requests\CheckPasswordRequest;
 use App\Http\Requests\GeneratePasswordRequest;
+use App\Http\Requests\UploadWordsRequest;
 use App\Models\EnglishWord;
 use App\Models\SpanishWord;
 use Illuminate\Http\Request;
@@ -13,10 +14,17 @@ use Illuminate\Http\JsonResponse;
 
 class PasswordController extends Controller
 {
-    public function uploadWords(Request $request): JsonResponse
+    public function uploadWords(UploadWordsRequest $request): JsonResponse
     {
         try {
-            $data = PasswordHelper::readFile('words_english.txt', false);
+            $file = $request->isSpanish ? 'words_spanish.txt' : 'words_english.txt';
+            $filePath = base_path($file);
+
+            if (!file_exists($filePath)) {
+                return response()->json(['status' => false, 'message' => 'File not found'], 404);
+            }
+
+            $data = PasswordHelper::readFile($filePath, $request->isSpanish);
             $totalAdded = count($data);
 
             if ($totalAdded == 0) {
@@ -26,7 +34,11 @@ class PasswordController extends Controller
                 ]);
             }
 
-            EnglishWord::insert($data);
+            if ($request->isSpanish) {
+                SpanishWord::insert($data);
+            } else {
+                EnglishWord::insert($data);
+            }
             return response()->json([
                 'status' => true,
                 'message' => 'Words uploaded successfully',

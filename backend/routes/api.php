@@ -10,7 +10,7 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(PasswordController::class)->group(function () {
-    Route::get('/en/words/upload', 'uploadWords');
+    Route::post('/words/upload', 'uploadWords');
     Route::post('/password/generate', 'generatePassword');
     Route::post('/password/check', 'checkPassword');
 });

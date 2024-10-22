@@ -31,13 +31,8 @@ class PasswordHelper
         };
     }
 
-    public static function readFile($path, $isSpanish)
+    public static function readFile($filePath, $isSpanish)
     {
-        $filePath = base_path($path);
-
-        if (!file_exists($filePath)) {
-            return response()->json(['status' => false, 'message' => 'File not found'], 404);
-        }
 
         $wordsSet = [];
         $fileContents = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
