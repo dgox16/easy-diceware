@@ -6,6 +6,7 @@ namespace App\Helpers;
 use App\Enums\TypePassword;
 use App\Models\EnglishWord;
 use App\Models\SpanishWord;
+use Exception;
 use ZxcvbnPhp\Zxcvbn;
 
 class PasswordHelper
@@ -31,8 +32,33 @@ class PasswordHelper
         };
     }
 
-    public static function readFile($filePath, $isSpanish)
+    public static function checkWordsToAdd($wordsToAdd, $isSpanish)
     {
+        if ($isSpanish) {
+            $existingWords = SpanishWord::whereIn('word', $wordsToAdd)->pluck('word')->toArray();
+        } else {
+            $existingWords = EnglishWord::whereIn('word', $wordsToAdd)->pluck('word')->toArray();
+        }
+
+        $data = [];
+        foreach ($wordsToAdd as $word) {
+            if (!in_array($word, $existingWords)) {
+                $data[] = ['word' => $word];  // Prepara el array para la inserción
+            }
+        }
+
+        return $data;
+    }
+
+    public static function readFile($isSpanish)
+    {
+
+        $file = $isSpanish ? 'words_spanish.txt' : 'words_english.txt';
+        $filePath = base_path($file);
+
+        if (!file_exists($filePath)) {
+            throw new Exception('File not found');
+        }
 
         $wordsSet = [];
         $fileContents = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -40,24 +66,32 @@ class PasswordHelper
         foreach ($fileContents as $line) {
             $word = trim($line);
             if (!empty($word)) {
-                $wordsSet[$word] = true;
+                $wordsSet[] = $word;  // Cambiar a un array simple
             }
+        }
+
+        return $wordsSet;
+    }
+
+    public static function addWords($words, $isSpanish)
+    {
+        $totalAdded = count($words);
+
+        if ($totalAdded == 0) {
+            throw new Exception('All the words are already in our database');
         }
 
         if ($isSpanish) {
-            $existingWords = SpanishWord::whereIn('word', array_keys($wordsSet))->pluck('word')->toArray();
+            SpanishWord::insert($words);
         } else {
-            $existingWords = EnglishWord::whereIn('word', array_keys($wordsSet))->pluck('word')->toArray();
+            EnglishWord::insert($words);
         }
 
-        $data = [];
-        foreach (array_keys($wordsSet) as $word) {
-            if (!in_array($word, $existingWords)) {
-                $data[] = ['word' => $word];
-            }
-        }
-
-        return $data;
+        return [
+            'status' => true,
+            'message' => 'Words uploaded successfully',
+            'totalAdded' => $totalAdded
+        ];
     }
 
     private static function formatLittleTime($seconds, $isSpanish)

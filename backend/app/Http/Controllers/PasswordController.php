@@ -5,31 +5,40 @@ namespace App\Http\Controllers;
 use App\Helpers\PasswordHelper;
 use App\Http\Requests\CheckPasswordRequest;
 use App\Http\Requests\GeneratePasswordRequest;
+use App\Http\Requests\NewWordsRequest;
 use App\Http\Requests\UploadWordsRequest;
 use App\Models\EnglishWord;
 use App\Models\SpanishWord;
-use Illuminate\Http\Request;
 use Throwable;
 use Illuminate\Http\JsonResponse;
 
 class PasswordController extends Controller
 {
+
+    public function newWords(NewWordsRequest $request): JsonResponse
+    {
+        try {
+            $wordsChecked = PasswordHelper::checkWordsToAdd($request->words, $request->isSpanish);
+            $response = PasswordHelper::addWords($wordsChecked, $request->words);
+
+            return response()->json($response);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
     public function uploadWords(UploadWordsRequest $request): JsonResponse
     {
         try {
-            $file = $request->isSpanish ? 'words_spanish.txt' : 'words_english.txt';
-            $filePath = base_path($file);
-
-            if (!file_exists($filePath)) {
-                return response()->json(['status' => false, 'message' => 'File not found'], 404);
-            }
-
-            $data = PasswordHelper::readFile($filePath, $request->isSpanish);
+            $wordsFile = PasswordHelper::readFile($request->isSpanish);
+            $data = PasswordHelper::checkWordsToAdd($wordsFile, $request->isSpanish);
             $totalAdded = count($data);
 
             if ($totalAdded == 0) {
                 return response()->json([
-                    'status' => true,
+                    'status' => false,
                     'message' => 'All the words are already in our database',
                 ]);
             }
@@ -47,7 +56,7 @@ class PasswordController extends Controller
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'Something went wrong'
+                'message' => $th->getMessage()
             ], 500);
         }
     }
