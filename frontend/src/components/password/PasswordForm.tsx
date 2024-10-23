@@ -31,11 +31,12 @@ export const PasswordForm = () => {
 						id="numberWords"
 						className="mt-2 sm:mt-4 w-3/4 mx-auto sm:mx-0 sm:w-full"
 						aria-label="Choose a value"
+						name="numberWords"
 						defaultValue={[4]}
 						min={2}
 						max={6}
 						step={1}
-						onValueChange={(value) =>
+						onValueCommit={(value) =>
 							changeFormGeneratePassword("count", value[0])
 						}
 					/>

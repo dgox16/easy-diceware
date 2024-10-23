@@ -14,7 +14,6 @@ use Illuminate\Http\JsonResponse;
 
 class PasswordController extends Controller
 {
-
     public function newWords(NewWordsRequest $request): JsonResponse
     {
         try {
