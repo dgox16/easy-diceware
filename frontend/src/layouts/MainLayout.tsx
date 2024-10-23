@@ -2,11 +2,7 @@ import React, { ReactNode } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 import { Navbar } from "@/components/navbar/Navbar";
 
-interface MainLayoutProps {
-	children: ReactNode;
-}
-
-export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+export const MainLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const { isSpanish } = useLanguageStore();
 
 	return (
