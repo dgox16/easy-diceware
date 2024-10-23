@@ -64,7 +64,7 @@ class PasswordController extends Controller
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th
+                'message' => 'Error: ' . $th->getMessage()
             ], 500);
         }
     }
@@ -81,7 +81,7 @@ class PasswordController extends Controller
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'Something went wrong'
+                'message' => 'Error: ' . $th->getMessage()
             ], 500);
         }
     }
