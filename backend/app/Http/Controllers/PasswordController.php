@@ -19,7 +19,7 @@ class PasswordController extends Controller
     {
         try {
             $wordsChecked = PasswordHelper::checkWordsToAdd($request->words, $request->isSpanish);
-            $response = PasswordHelper::addWords($wordsChecked, $request->words);
+            $response = PasswordHelper::addWords($wordsChecked, $request->isSpanish);
 
             return response()->json($response);
         } catch (Throwable $th) {
@@ -33,26 +33,10 @@ class PasswordController extends Controller
     {
         try {
             $wordsFile = PasswordHelper::readFile($request->isSpanish);
-            $data = PasswordHelper::checkWordsToAdd($wordsFile, $request->isSpanish);
-            $totalAdded = count($data);
+            $wordsChecked = PasswordHelper::checkWordsToAdd($wordsFile, $request->isSpanish);
+            $response = PasswordHelper::addWords($wordsChecked, $request->isSpanish);
 
-            if ($totalAdded == 0) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'All the words are already in our database',
-                ]);
-            }
-
-            if ($request->isSpanish) {
-                SpanishWord::insert($data);
-            } else {
-                EnglishWord::insert($data);
-            }
-            return response()->json([
-                'status' => true,
-                'message' => 'Words uploaded successfully',
-                'totalAdded' => $totalAdded
-            ]);
+            return response()->json($response);
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
