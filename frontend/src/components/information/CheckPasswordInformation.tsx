@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguageStore } from "@/store/languageStore";
-import { AlertCircle, ShieldX, Skull } from "lucide-react";
+import { ShieldX, Skull } from "lucide-react";
 
 export const CheckPasswordInformation = () => {
 	const { isSpanish } = useLanguageStore();
