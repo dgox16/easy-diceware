@@ -4,7 +4,7 @@ export const PrincipalText: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
 	return (
-		<h1 className="scroll-m-20 text-[1.78rem] sm:text-6xl -mb-1 sm:mb-1 font-black tracking-tight">
+		<h1 className="scroll-m-20 text-[1.83rem] sm:text-6xl -mb-1 sm:mb-1 font-black tracking-tight">
 			{children}
 		</h1>
 	);
