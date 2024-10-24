@@ -2,38 +2,12 @@ import { MainLayout } from "@/layouts/MainLayout.tsx";
 import { useLanguageStore } from "@/store/languageStore";
 import { PrincipalText, SecondaryText } from "@/components/text/HeaderText";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
-import {
-	CheckPasswordRequest,
-	CheckPasswordResponse,
-} from "@/types/checkPasswordTypes";
-import { checkPasswordRequest } from "@/services/passwordRequest";
 import { TimeToCrack } from "@/components/password/TimeToCrack";
+import { useCheckPassword } from "@/hooks/useCheckPassword";
 
 export const CheckPasswordPage = () => {
 	const { isSpanish } = useLanguageStore();
-	const [passwordInput, setPasswordInput] = useState("");
-	const [password, setPassword] = useState<CheckPasswordResponse>({
-		timeToCrack: "",
-		status: false,
-	});
-
-	useEffect(() => {
-		const handler = setTimeout(async () => {
-			if (passwordInput) {
-				const formData: CheckPasswordRequest = {
-					password: passwordInput,
-					isSpanish,
-				};
-				const res = await checkPasswordRequest(formData);
-				setPassword(res);
-			}
-		}, 200);
-
-		return () => {
-			clearTimeout(handler);
-		};
-	}, [passwordInput]);
+	const { password, handleChange } = useCheckPassword();
 
 	return (
 		<MainLayout>
@@ -55,7 +29,7 @@ export const CheckPasswordPage = () => {
 					<div className="w-[600px]">
 						<Input
 							type="email"
-							onChange={(e) => setPasswordInput(e.target.value)}
+							onChange={(e) => handleChange(e.target.value)}
 							placeholder={
 								isSpanish
 									? "Coloca la contraseña a analizar"
