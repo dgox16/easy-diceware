@@ -1,11 +1,11 @@
-import { PasswordGenerateResponse } from "@/types/PasswordGenerateTypes";
 import { useEffect, useRef, useState } from "react";
 import { generatePasswordRequest } from "@/services/passwordRequest";
 import { useGeneratePasswordStore } from "@/store/generatePasswordStore";
+import { GeneratePasswordResponse } from "@/types/generatePasswordTypes";
 
-export const useGeneratePassword = (): PasswordGenerateResponse => {
+export const useGeneratePassword = (): GeneratePasswordResponse => {
 	const { formGeneratePassword } = useGeneratePasswordStore();
-	const [password, setPassword] = useState<PasswordGenerateResponse>({
+	const [password, setPassword] = useState<GeneratePasswordResponse>({
 		password: "",
 		timeToCrack: "",
 		status: false,

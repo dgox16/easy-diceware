@@ -1,15 +1,5 @@
-import { PasswordGenerateRequest } from "@/types/PasswordGenerateTypes";
+import { GeneratePasswordState } from "@/types/generatePasswordTypes";
 import { create } from "zustand";
-
-type ChangePasswordGenerateType = (
-	name: keyof PasswordGenerateRequest,
-	value: string | number | boolean,
-) => void;
-
-interface GeneratePasswordState {
-	formGeneratePassword: PasswordGenerateRequest;
-	changeFormGeneratePassword: ChangePasswordGenerateType;
-}
 
 export const useGeneratePasswordStore = create<GeneratePasswordState>(
 	(set) => ({

@@ -1,8 +1,8 @@
-import { PasswordGenerateResponse } from "@/types/PasswordGenerateTypes";
+import { GeneratePasswordResponse } from "@/types/generatePasswordTypes";
 import { TimeToCrack } from "./TimeToCrack";
 
 export const PasswordViewer: React.FC<{
-	password: PasswordGenerateResponse;
+	password: GeneratePasswordResponse;
 }> = ({ password }) => {
 	return (
 		<div className="flex flex-col justify-center mt-5 mx-5 sm:mx-0">
