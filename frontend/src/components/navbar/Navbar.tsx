@@ -17,7 +17,7 @@ import { SidebarItem } from "./SidebarItem";
 export const Navbar = () => {
 	const { isSpanish } = useLanguageStore();
 	return (
-		<nav className="fixed top-0 z-10 flex justify-center items-center w-full mx-auto bg-opacity-80 backdrop-blur-sm bg-zinc-950">
+		<nav className="fixed top-0 z-10 flex justify-center items-center w-full mx-auto bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm bg-zinc-50 dark:bg-zinc-950">
 			<div className="w-[1000px] flex flex-row items-center justify-between h-14 mx-5 sm:mx-0">
 				<div className="inline sm:hidden">
 					<Sheet>
