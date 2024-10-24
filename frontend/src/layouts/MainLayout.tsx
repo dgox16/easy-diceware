@@ -9,7 +9,9 @@ export const MainLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 		<>
 			<Navbar />
 			<main className="flex justify-center">
-				<div className="w-full sm:w-[1000px]">{children}</div>
+				<div className="w-full sm:w-[1000px] mt-24 sm:mt-[10.5rem]">
+					{children}
+				</div>
 			</main>
 			<footer className="flex justify-center mt-8">
 				<div className=" w-recommend text-center">

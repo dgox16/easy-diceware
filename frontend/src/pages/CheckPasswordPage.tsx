@@ -11,7 +11,7 @@ export const CheckPasswordPage = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex justify-center mt-10 sm:mt-28 flex-col">
+			<div className="flex justify-center flex-col">
 				<div className="flex justify-center text-center">
 					<PrincipalText>
 						{isSpanish ? "Revisa y Refuerza" : "Review and Reinforce"}
