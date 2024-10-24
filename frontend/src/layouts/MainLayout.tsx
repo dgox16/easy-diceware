@@ -6,9 +6,9 @@ export const MainLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const { isSpanish } = useLanguageStore();
 
 	return (
-		<>
+		<div className="flex flex-col min-h-screen">
 			<Navbar />
-			<main className="flex justify-center">
+			<main className="flex flex-grow justify-center">
 				<div className="w-full sm:w-[1000px] mt-24 sm:mt-[10.5rem]">
 					{children}
 				</div>
@@ -25,6 +25,6 @@ export const MainLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 					</p>
 				</div>
 			</footer>
-		</>
+		</div>
 	);
 };
