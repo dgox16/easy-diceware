@@ -14,7 +14,7 @@ export const SecondaryText: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
 	return (
-		<h2 className="scroll-m-20 text-[0.9rem] sm:text-2xl font-semibold tracking-tight">
+		<h2 className="scroll-m-20 text-[0.93rem] sm:text-2xl font-semibold tracking-tight">
 			{children}
 		</h2>
 	);
