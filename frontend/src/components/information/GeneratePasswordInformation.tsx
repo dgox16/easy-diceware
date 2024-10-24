@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguageStore } from "@/store/languageStore";
 import { Dice3, Shell, Waves } from "lucide-react";
 
-export const DiceWareInformation = () => {
+export const GeneratePasswordInformation = () => {
 	const { isSpanish } = useLanguageStore();
 
 	return (

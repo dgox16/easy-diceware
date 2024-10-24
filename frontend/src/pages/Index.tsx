@@ -4,7 +4,7 @@ import { PasswordForm } from "@/components/password/PasswordForm";
 import { useLanguageStore } from "@/store/languageStore";
 import { useGeneratePassword } from "@/hooks/useGeneratePassword";
 import { PasswordViewer } from "@/components/password/PasswordViewer";
-import { DiceWareInformation } from "@/components/information/DicewareInformation";
+import { GeneratePasswordInformation } from "@/components/information/GeneratePasswordInformation";
 import { PrincipalText, SecondaryText } from "@/components/text/HeaderText";
 
 export const Index = () => {
@@ -33,7 +33,7 @@ export const Index = () => {
 				)}
 				<PasswordForm />
 			</div>
-			<DiceWareInformation />
+			<GeneratePasswordInformation />
 		</MainLayout>
 	);
 };

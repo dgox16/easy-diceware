@@ -4,6 +4,7 @@ import { PrincipalText, SecondaryText } from "@/components/text/HeaderText";
 import { Input } from "@/components/ui/input";
 import { TimeToCrack } from "@/components/password/TimeToCrack";
 import { useCheckPassword } from "@/hooks/useCheckPassword";
+import { CheckPasswordInformation } from "@/components/information/CheckPasswordInformation";
 
 export const CheckPasswordPage = () => {
 	const { isSpanish } = useLanguageStore();
