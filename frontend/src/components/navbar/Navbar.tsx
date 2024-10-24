@@ -12,6 +12,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { useLanguageStore } from "@/store/languageStore";
+import { SidebarItem } from "./SidebarItem";
 
 export const Navbar = () => {
 	const { isSpanish } = useLanguageStore();
@@ -30,30 +31,39 @@ export const Navbar = () => {
 									<SheetTitle className="text-left">EasyDiceware</SheetTitle>
 									<SheetDescription>
 										<ul className="text-left text-base">
-											<li className="mb-2">
-												<Link to={"/"}>
-													{isSpanish
+											<SidebarItem
+												to={"/"}
+												external={false}
+												ariaLabel={
+													isSpanish
 														? "Generador de contraseñas"
-														: "Password Generator"}
-												</Link>
-											</li>
-											<li className="mb-2">
-												<Link to={"/check-password"}>
-													{isSpanish
+														: "Password Generator"
+												}
+											>
+												{isSpanish
+													? "Generador de contraseñas"
+													: "Password Generator"}
+											</SidebarItem>
+											<SidebarItem
+												to={"/check-password"}
+												external={false}
+												ariaLabel={
+													isSpanish
 														? "Verificador de contraseñas"
-														: "Password Strength Tester"}
-												</Link>
-											</li>
-											<li>
-												<a
-													aria-label="Github"
-													href="https://github.com/dgox16/easy-diceware"
-													target="_blank"
-													rel="noreferrer noopener"
-												>
-													{isSpanish ? "Ver en GitHub" : "See on GitHub"}
-												</a>
-											</li>
+														: "Password Strength Tester"
+												}
+											>
+												{isSpanish
+													? "Verificador de contraseñas"
+													: "Password Strength Tester"}
+											</SidebarItem>
+											<SidebarItem
+												to="https://github.com/dgox16/easy-diceware"
+												external={true}
+												ariaLabel={"Github"}
+											>
+												{isSpanish ? "Ver en GitHub" : "See on GitHub"}
+											</SidebarItem>
 										</ul>
 									</SheetDescription>
 								</SheetHeader>
