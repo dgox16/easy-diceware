@@ -30,7 +30,7 @@ export const useCheckPassword = () => {
 					setPassword(res);
 				}
 			}
-		}, 200);
+		}, 180);
 
 		return () => {
 			clearTimeout(handler);

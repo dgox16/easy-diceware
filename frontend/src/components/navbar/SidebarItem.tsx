@@ -8,7 +8,7 @@ export const SidebarItem: React.FC<{
 	external: boolean;
 }> = ({ children, to, ariaLabel, external }) => {
 	return (
-		<li className="mb-0 py-2">
+		<li className="mb-0 py-2  text-left">
 			<Link
 				to={to}
 				aria-label={ariaLabel}

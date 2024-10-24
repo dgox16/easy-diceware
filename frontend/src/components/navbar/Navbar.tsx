@@ -30,7 +30,7 @@ export const Navbar = () => {
 								<SheetHeader>
 									<SheetTitle className="text-left">EasyDiceware</SheetTitle>
 									<SheetDescription>
-										<ul className="text-left text-base">
+										<ul className="">
 											<SidebarItem
 												to={"/"}
 												external={false}
