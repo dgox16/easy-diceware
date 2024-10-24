@@ -1,20 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguageStore } from "@/store/languageStore";
-import { Dice3, Shell, Skull } from "lucide-react";
+import { AlertCircle, ShieldX, Skull } from "lucide-react";
 
 export const CheckPasswordInformation = () => {
 	const { isSpanish } = useLanguageStore();
 
 	return (
-		<div className="grid grid-cols-2 gap-4 justify-center mt-10 sm:mt-16 mx-5 sm:mx-0">
+		<div className="grid grid-cols-2 gap-4 justify-center mt-5 sm:mt-8 mx-5 sm:mx-0">
 			<Card className="col-span-2 sm:col-span-1">
 				<CardHeader>
 					<div className="flex items-center">
-						<Skull className="size-10 sm:size-8 mr-4 sm:mr-3" />
-						<CardTitle className="text-xl sm:text-xl text-pretty">
-							{isSpanish
-								? "Riesgos de Contraseñas Débiles"
-								: "The Vulnerability of Weak Passwords"}
+						<ShieldX className="size-6 sm:size-9 mr-3" />
+						<CardTitle className="text-xl sm:text-2xl">
+							{isSpanish ? "Contraseñas Débiles" : "Weak Passwords"}
 						</CardTitle>
 					</div>
 				</CardHeader>
@@ -34,11 +32,9 @@ export const CheckPasswordInformation = () => {
 			<Card className="col-span-2 sm:col-span-1">
 				<CardHeader>
 					<div className="flex items-center">
-						<Skull className="size-10 sm:size-8 mr-4 sm:mr-3" />
-						<CardTitle className="text-xl sm:text-xl text-pretty">
-							{isSpanish
-								? "Consejos para una contraseña segura"
-								: "Tips for a secure password"}
+						<Skull className="size-6 sm:size-9 mr-3" />
+						<CardTitle className="text-xl sm:text-2xl">
+							{isSpanish ? "Consejos para contraseñas" : "Password Tips"}
 						</CardTitle>
 					</div>
 				</CardHeader>
@@ -46,18 +42,28 @@ export const CheckPasswordInformation = () => {
 					<ul className="ml-6 list-disc [&>li]:mt-2 text-sm sm:text-base">
 						<li>
 							{isSpanish
-								? "Facilidad para recordar: Las contraseñas formadas por palabras son más fáciles de recordar que cadenas aleatorias de caracteres."
-								: "Easy to remember: Passwords formed by words are easier to remember than random strings of characters."}
+								? "Usa al menos 12 caracteres: Las contraseñas más largas son más seguras."
+								: "Use at least 12 characters: Longer passwords are more secure."}
 						</li>
 						<li>
 							{isSpanish
-								? "Seguridad: Al utilizar palabras aleatorias, el número de combinaciones posibles aumenta significativamente, haciendo que la contraseña sea más segura contra ataques de fuerza bruta."
-								: "Security: By using random words, the number of possible combinations increases significantly, making the password more secure against brute-force attacks."}
+								? "Combina caracteres: Incluye mayúsculas, minúsculas, números y símbolos."
+								: "Combine characters: Include uppercase, lowercase, numbers, and symbols."}
 						</li>
 						<li>
 							{isSpanish
-								? "Personalización: Puedes personalizar el número de palabras que deseas usar, lo que te permite equilibrar la seguridad y la facilidad de uso."
-								: "Customization: You can customize the number of words you want to use, allowing you to balance security and ease of use."}
+								? "Evita información personal: No uses nombres o fechas fáciles de adivinar."
+								: "Avoid personal information: Don’t use easily guessable names or dates."}
+						</li>
+						<li>
+							{isSpanish
+								? "No reutilices contraseñas: Usa una diferente para cada cuenta."
+								: "Don’t reuse passwords: Use a different one for each account."}
+						</li>
+						<li>
+							{isSpanish
+								? "Usa contraseñas aleatorias: Las combinaciones únicas de caracteres son más difíciles de adivinar y ofrecen mayor seguridad."
+								: "Use random passwords: Unique character combinations are harder to guess and provide greater security."}
 						</li>
 					</ul>
 				</CardContent>

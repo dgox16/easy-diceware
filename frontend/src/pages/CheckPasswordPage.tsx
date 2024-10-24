@@ -41,6 +41,7 @@ export const CheckPasswordPage = () => {
 					</div>
 				</div>
 				{password.status && <TimeToCrack timeToCrack={password.timeToCrack} />}
+				<CheckPasswordInformation />
 			</div>
 		</MainLayout>
 	);
