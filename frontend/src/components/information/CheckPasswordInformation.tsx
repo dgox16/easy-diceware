@@ -6,7 +6,7 @@ export const CheckPasswordInformation = () => {
 	const { isSpanish } = useLanguageStore();
 
 	return (
-		<div className="grid grid-cols-2 gap-4 justify-center mt-5 sm:mt-8 mx-5 sm:mx-0">
+		<div className="grid grid-cols-2 gap-4 justify-center mt-5 sm:mt-8 mx-5 lg:mx-0">
 			<Card className="col-span-2 sm:col-span-1">
 				<CardHeader>
 					<div className="flex items-center">

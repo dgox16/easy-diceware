@@ -13,7 +13,7 @@ export const Index = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex justify-center  flex-col">
+			<div className="flex justify-center flex-col">
 				<div className="flex justify-center text-center">
 					<PrincipalText>
 						{isSpanish ? "La clave es la simplicidad" : "The key is simplicity"}
