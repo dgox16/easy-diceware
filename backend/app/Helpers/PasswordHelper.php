@@ -104,22 +104,22 @@ class PasswordHelper
             'years' => [
                 'singular' => $isSpanish ? 'año' : 'year',
                 'plural' => $isSpanish ? 'años' : 'years',
-                'divider' => 365 * 24 * 60 * 60,
+                'divider' => 31536000,  // 365 * 24 * 60 * 60
             ],
             'months' => [
                 'singular' => $isSpanish ? 'mes' : 'month',
                 'plural' => $isSpanish ? 'meses' : 'months',
-                'divider' => 30 * 24 * 60 * 60,
+                'divider' => 2592000,  // 30 * 24 * 60 * 60
             ],
             'days' => [
                 'singular' => $isSpanish ? 'día' : 'day',
                 'plural' => $isSpanish ? 'días' : 'days',
-                'divider' => 24 * 60 * 60,
+                'divider' => 86400,  // 24 * 60 * 60
             ],
             'hours' => [
                 'singular' => $isSpanish ? 'hora' : 'hour',
                 'plural' => $isSpanish ? 'horas' : 'hours',
-                'divider' => 60 * 60,
+                'divider' => 3600,  // 60 * 60
             ],
             'minutes' => [
                 'singular' => $isSpanish ? 'minuto' : 'minute',
