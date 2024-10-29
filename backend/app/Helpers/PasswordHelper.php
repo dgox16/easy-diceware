@@ -7,6 +7,7 @@ use App\Enums\TypePassword;
 use App\Models\EnglishWord;
 use App\Models\SpanishWord;
 use Exception;
+use JetBrains\PhpStorm\ArrayShape;
 use ZxcvbnPhp\Zxcvbn;
 
 class PasswordHelper
@@ -25,14 +26,14 @@ class PasswordHelper
             TypePassword::PascalCase => $words->map(function ($word) {
                 return ucfirst(trim($word));
             })->implode(''),
-            TypePassword::CamelCase =>  $words->map(function ($word, $index) {
+            TypePassword::CamelCase => $words->map(function ($word, $index) {
                 return $index === 0 ? strtolower(trim($word)) : ucfirst(trim($word));
             })->implode(''),
             default => $words->implode(' '),
         };
     }
 
-    public static function checkWordsToAdd($wordsToAdd, $isSpanish)
+    public static function checkWordsToAdd($wordsToAdd, $isSpanish): array
     {
         if ($isSpanish) {
             $existingWords = SpanishWord::whereIn('word', $wordsToAdd)->pluck('word')->toArray();
@@ -50,7 +51,7 @@ class PasswordHelper
         return $data;
     }
 
-    public static function readFile($isSpanish)
+    public static function readFile($isSpanish): array
     {
 
         $file = $isSpanish ? 'words_spanish.txt' : 'words_english.txt';
@@ -73,7 +74,8 @@ class PasswordHelper
         return $wordsSet;
     }
 
-    public static function addWords($words, $isSpanish)
+    #[ArrayShape(['status' => "bool", 'message' => "string", 'totalAdded' => "int"])]
+    public static function addWords($words, $isSpanish): array
     {
         $totalAdded = count($words);
 
@@ -94,7 +96,7 @@ class PasswordHelper
         ];
     }
 
-    private static function formatLittleTime($seconds, $isSpanish)
+    private static function formatLittleTime($seconds, $isSpanish): string
     {
         if ($seconds < 1) {
             return $isSpanish ? 'Menos de un segundo' : 'Less than a second';
@@ -143,7 +145,7 @@ class PasswordHelper
         return $seconds . ($isSpanish ? ' segundos' : ' seconds');
     }
 
-    private static function formatLargeTime($years, $isSpanish)
+    private static function formatLargeTime($years, $isSpanish): string
     {
         if ($years > 1e9) {
             return $isSpanish ? 'Más de mil millones de años' : 'More than a billion years';
@@ -172,17 +174,17 @@ class PasswordHelper
         return $years . ($isSpanish ? ' años' : ' years');
     }
 
-    private static function formatTime($seconds, $isSpanish)
+    private static function formatTime($seconds, $isSpanish): string
     {
-        if ($seconds < 365 * 24 * 60 * 60) {
+        if ($seconds < 31536000) {
             return self::formatLittleTime($seconds, $isSpanish);
         }
-        $years = $seconds / (365 * 24 * 60 * 60);
+        $years = $seconds / (31536000);
 
         return self::formatLargeTime($years, $isSpanish);
     }
 
-    public static function calculateStrength($password, $isSpanish)
+    public static function calculateStrength($password, $isSpanish): string
     {
         $zxcvbn = new Zxcvbn();
         $passwordStrength = $zxcvbn->passwordStrength($password);
