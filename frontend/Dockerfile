@@ -8,7 +8,7 @@ RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN pnpm build
+RUN echo "VITE_API_URL=$VITE_API_URL" && pnpm build
 
 FROM caddy:2-alpine
 
