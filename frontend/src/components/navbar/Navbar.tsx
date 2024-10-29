@@ -48,7 +48,7 @@ export const Navbar = () => {
 											external={false}
 											ariaLabel={
 												isSpanish
-													? "Verificador de contraseñas"
+													? "Analizador de contraseñas"
 													: "Password Strength Tester"
 											}
 										>
@@ -80,7 +80,7 @@ export const Navbar = () => {
 						to={"/check-password"}
 						className="text-sm ml-6 text-zinc-700 dark:text-zinc-300 hover:underline hidden sm:inline"
 					>
-						Check my password
+						{isSpanish ? "Analizar mi contraseña" : "Check my password"}
 					</Link>
 				</div>
 				<div>

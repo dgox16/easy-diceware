@@ -29,7 +29,6 @@ export const CheckPasswordPage = () => {
 				<div className="flex justify-center mt-5 mx-5">
 					<div className="w-[600px]">
 						<Input
-							type="email"
 							onChange={(e) => handleChange(e.target.value)}
 							placeholder={
 								isSpanish
