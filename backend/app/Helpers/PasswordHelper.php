@@ -7,7 +7,6 @@ use App\Enums\TypePassword;
 use App\Models\EnglishWord;
 use App\Models\SpanishWord;
 use Exception;
-use JetBrains\PhpStorm\ArrayShape;
 use ZxcvbnPhp\Zxcvbn;
 
 class PasswordHelper
@@ -80,7 +79,6 @@ class PasswordHelper
     /**
      * @throws Exception
      */
-    #[ArrayShape(['status' => "bool", 'message' => "string", 'totalAdded' => "int"])]
     public static function addWords($words, $isSpanish): array
     {
         $totalAdded = count($words);
@@ -109,11 +107,6 @@ class PasswordHelper
         }
 
         $units = [
-            'years' => [
-                'singular' => $isSpanish ? 'año' : 'year',
-                'plural' => $isSpanish ? 'años' : 'years',
-                'divider' => 31536000,  // 365 * 24 * 60 * 60
-            ],
             'months' => [
                 'singular' => $isSpanish ? 'mes' : 'month',
                 'plural' => $isSpanish ? 'meses' : 'months',
