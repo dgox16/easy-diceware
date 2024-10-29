@@ -11,6 +11,7 @@ use App\Models\EnglishWord;
 use App\Models\SpanishWord;
 use Throwable;
 use Illuminate\Http\JsonResponse;
+use Valorin\Random\Random;
 
 class PasswordController extends Controller
 {
@@ -28,6 +29,7 @@ class PasswordController extends Controller
             ], 500);
         }
     }
+
     public function uploadWords(UploadWordsRequest $request): JsonResponse
     {
         try {
@@ -48,10 +50,12 @@ class PasswordController extends Controller
     {
         try {
             if ($request->isSpanish) {
-                $words = SpanishWord::inRandomOrder()->take($request->count)->pluck('word');
+                $wordList = SpanishWord::pluck('word');
             } else {
-                $words = EnglishWord::inRandomOrder()->take($request->count)->pluck('word');
+                $wordList = EnglishWord::pluck('word');
             }
+
+            $words = Random::pick($wordList, $request->count);
             $password = PasswordHelper::addDelimiters($words, $request->type);
             $timeToCrack = PasswordHelper::calculateStrength($password, $request->isSpanish);
 
