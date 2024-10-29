@@ -6,6 +6,9 @@ use App\Enums\TypePassword;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed $isSpanish
+ */
 class UploadWordsRequest extends FormRequest
 {
     public function authorize(): bool

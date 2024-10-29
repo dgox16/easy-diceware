@@ -26,7 +26,7 @@ class UserController extends Controller
                 'status' => true,
                 'message' => 'User created successfully'
             ]);
-        } catch (Throwable $th) {
+        } catch (Throwable) {
             return response()->json([
                 'status' => false,
                 'message' => 'Something went wrong'
@@ -53,7 +53,7 @@ class UserController extends Controller
                 'token' => $token
             ]);
 
-        } catch (Throwable $th) {
+        } catch (Throwable) {
             return response()->json([
                 'status' => false,
                 'message' => 'Something went wrong'

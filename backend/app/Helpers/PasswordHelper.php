@@ -51,6 +51,9 @@ class PasswordHelper
         return $data;
     }
 
+    /**
+     * @throws Exception
+     */
     public static function readFile($isSpanish): array
     {
 
@@ -74,6 +77,9 @@ class PasswordHelper
         return $wordsSet;
     }
 
+    /**
+     * @throws Exception
+     */
     #[ArrayShape(['status' => "bool", 'message' => "string", 'totalAdded' => "int"])]
     public static function addWords($words, $isSpanish): array
     {
@@ -135,7 +141,7 @@ class PasswordHelper
             ],
         ];
 
-        foreach ($units as $key => $data) {
+        foreach ($units as $data) {
             if ($seconds >= $data['divider']) {
                 $value = intval($seconds / $data['divider']);
                 return $value === 1 ? "1 " . $data['singular'] : "$value " . $data['plural'];
@@ -164,7 +170,7 @@ class PasswordHelper
             ],
         ];
 
-        foreach ($units as $key => $data) {
+        foreach ($units as $data) {
             if ($years >= $data['divider']) {
                 $value = intval($years / $data['divider']);
                 return $value === 1 ? "1 " . $data['singular'] : "$value " . $data['plural'];
@@ -190,8 +196,6 @@ class PasswordHelper
         $passwordStrength = $zxcvbn->passwordStrength($password);
 
         $timeToCrackSec = $passwordStrength['crack_times_seconds']['offline_fast_hashing_1e10_per_second'];
-        $timeToCrack = self::formatTime($timeToCrackSec, $isSpanish);
-
-        return $timeToCrack;
+        return self::formatTime($timeToCrackSec, $isSpanish);
     }
 }
