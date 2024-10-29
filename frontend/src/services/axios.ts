@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-	baseURL: "https://api-easy-diceware.up.railway.app",
+	baseURL: import.meta.env.VITE_API_URL,
 	withCredentials: true,
 	withXSRFToken: true,
 });
