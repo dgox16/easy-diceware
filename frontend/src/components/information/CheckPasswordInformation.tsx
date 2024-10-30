@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguageStore } from "@/store/languageStore";
-import { ShieldX, Skull } from "lucide-react";
+import { Shield, ShieldX } from "lucide-react";
 
 export const CheckPasswordInformation = () => {
 	const { isSpanish } = useLanguageStore();
@@ -32,7 +32,7 @@ export const CheckPasswordInformation = () => {
 			<Card className="col-span-2 sm:col-span-1">
 				<CardHeader>
 					<div className="flex items-center">
-						<Skull className="size-6 sm:size-9 mr-3" />
+						<Shield className="size-6 sm:size-9 mr-3" />
 						<CardTitle className="text-xl sm:text-2xl">
 							{isSpanish ? "Consejos para contraseñas" : "Password Tips"}
 						</CardTitle>
