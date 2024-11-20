@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { generatePasswordRequest } from "@/services/passwordRequest";
 import { useGeneratePasswordStore } from "@/store/generatePasswordStore";
 import { GeneratePasswordResponse } from "@/types/generatePasswordTypes";
+import { useLanguageStore } from "@/store/languageStore";
 
 export const useGeneratePassword = (): GeneratePasswordResponse => {
 	const { formGeneratePassword } = useGeneratePasswordStore();
+	const { isSpanish } = useLanguageStore();
 	const [password, setPassword] = useState<GeneratePasswordResponse>({
 		password: "",
 		timeToCrack: "",
@@ -14,7 +16,11 @@ export const useGeneratePassword = (): GeneratePasswordResponse => {
 
 	useEffect(() => {
 		const getPassword = async () => {
-			const response = await generatePasswordRequest(formGeneratePassword);
+			const formToSend = {
+				...formGeneratePassword,
+				isSpanish,
+			};
+			const response = await generatePasswordRequest(formToSend);
 			if (response.status) {
 				setPassword(response);
 			}
