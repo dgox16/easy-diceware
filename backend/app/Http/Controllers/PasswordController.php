@@ -54,19 +54,23 @@ class PasswordController extends Controller
 
             $wordModel = $isSpanish ? new SpanishWord : new EnglishWord;
 
-            $wordList = DB::select("
+            $wordList = collect();
+
+            foreach (DB::cursor("
                 SELECT word
                 FROM (
                     SELECT word FROM {$wordModel->getTable()} TABLESAMPLE BERNOULLI(1)
                 ) AS subquery
                 ORDER BY RANDOM()
                 LIMIT ?
-            ", [$count]);
+            ", [$count]) as $row) {
+                $wordList->push($row->word);
+            }
 
-            $wordList = collect($wordList)->pluck('word')->toArray();
-
-            $password = PasswordHelper::addDelimiters(collect($wordList), $request->type);
+            $password = PasswordHelper::addDelimiters($wordList, $request->type);
             $timeToCrack = PasswordHelper::calculateStrength($password, $isSpanish);
+
+            gc_collect_cycles();
 
             return response()->json([
                 'status' => true,
