@@ -9,9 +9,9 @@ use App\Http\Requests\NewWordsRequest;
 use App\Http\Requests\UploadWordsRequest;
 use App\Models\EnglishWord;
 use App\Models\SpanishWord;
-use Throwable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class PasswordController extends Controller
 {
@@ -25,7 +25,7 @@ class PasswordController extends Controller
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage()
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -41,7 +41,7 @@ class PasswordController extends Controller
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage()
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -49,10 +49,10 @@ class PasswordController extends Controller
     public function generatePassword(GeneratePasswordRequest $request): JsonResponse
     {
         try {
-            $count = max(1, (int) $request->count);
-            $isSpanish = (bool) $request->isSpanish;
+            $count = $request->count;
+            $isSpanish = $request->isSpanish;
 
-            $wordModel = $isSpanish ? new SpanishWord() : new EnglishWord();
+            $wordModel = $isSpanish ? new SpanishWord : new EnglishWord;
 
             $wordList = DB::select("
                 SELECT word
@@ -67,15 +67,16 @@ class PasswordController extends Controller
 
             $password = PasswordHelper::addDelimiters(collect($wordList), $request->type);
             $timeToCrack = PasswordHelper::calculateStrength($password, $isSpanish);
+
             return response()->json([
                 'status' => true,
                 'password' => $password,
-                'timeToCrack' => $timeToCrack
+                'timeToCrack' => $timeToCrack,
             ]);
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'Error: ' . $th->getMessage()
+                'message' => 'Error: '.$th->getMessage(),
             ], 500);
         }
     }
@@ -87,12 +88,12 @@ class PasswordController extends Controller
 
             return response()->json([
                 'status' => true,
-                'timeToCrack' => $timeToCrack
+                'timeToCrack' => $timeToCrack,
             ]);
         } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'Error: ' . $th->getMessage()
+                'message' => 'Error: '.$th->getMessage(),
             ], 500);
         }
     }
