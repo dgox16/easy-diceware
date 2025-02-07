@@ -30,7 +30,8 @@ class GeneratePasswordRequest extends FormRequest
         return [
             'count' => 'required|integer|min:1|max:20',
             'type' => [Rule::enum(TypePassword::class)],
-            'isSpanish' => 'required|boolean'
+            'isSpanish' => 'required|boolean',
+            'withSymbols' => 'required|boolean',
         ];
     }
 }

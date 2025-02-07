@@ -11,7 +11,7 @@ use App\Models\EnglishWord;
 use App\Models\SpanishWord;
 use Throwable;
 use Illuminate\Http\JsonResponse;
-use Valorin\Random\Random;
+use Illuminate\Support\Facades\DB;
 
 class PasswordController extends Controller
 {
@@ -49,16 +49,24 @@ class PasswordController extends Controller
     public function generatePassword(GeneratePasswordRequest $request): JsonResponse
     {
         try {
-            if ($request->isSpanish) {
-                $wordList = SpanishWord::pluck('word');
-            } else {
-                $wordList = EnglishWord::pluck('word');
-            }
+            $count = max(1, (int) $request->count);
+            $isSpanish = (bool) $request->isSpanish;
 
-            $words = Random::pick($wordList, $request->count);
-            $password = PasswordHelper::addDelimiters($words, $request->type);
-            $timeToCrack = PasswordHelper::calculateStrength($password, $request->isSpanish);
+            $wordModel = $isSpanish ? new SpanishWord() : new EnglishWord();
 
+            $wordList = DB::select("
+                SELECT word
+                FROM (
+                    SELECT word FROM {$wordModel->getTable()} TABLESAMPLE BERNOULLI(1)
+                ) AS subquery
+                ORDER BY RANDOM()
+                LIMIT ?
+            ", [$count]);
+
+            $wordList = collect($wordList)->pluck('word')->toArray();
+
+            $password = PasswordHelper::addDelimiters(collect($wordList), $request->type);
+            $timeToCrack = PasswordHelper::calculateStrength($password, $isSpanish);
             return response()->json([
                 'status' => true,
                 'password' => $password,
