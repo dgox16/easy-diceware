@@ -70,8 +70,6 @@ class PasswordController extends Controller
             $password = PasswordHelper::addDelimiters($wordList, $request->type);
             $timeToCrack = PasswordHelper::calculateStrength($password, $isSpanish);
 
-            gc_collect_cycles();
-
             return response()->json([
                 'status' => true,
                 'password' => $password,
