@@ -19,7 +19,6 @@ class GeneratePasswordRequest extends FormRequest
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +30,6 @@ class GeneratePasswordRequest extends FormRequest
             'count' => 'required|integer|min:1|max:20',
             'type' => [Rule::enum(TypePassword::class)],
             'isSpanish' => 'required|boolean',
-            'withSymbols' => 'required|boolean',
         ];
     }
 }
