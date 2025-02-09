@@ -66,6 +66,10 @@ class PasswordController extends Controller
             $wordList = collect($wordList)->pluck('word')->toArray();
 
             $password = PasswordHelper::addDelimiters(collect($wordList), $request->type);
+            if ($request->withNumbers) {
+                $password = PasswordHelper::addNumbers($password, $count);
+            }
+
             $timeToCrack = PasswordHelper::calculateStrength($password, $isSpanish);
 
             return response()->json([

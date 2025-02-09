@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-
 use App\Enums\TypePassword;
 use App\Models\EnglishWord;
 use App\Models\SpanishWord;
@@ -32,6 +31,22 @@ class PasswordHelper
         };
     }
 
+    public static function addNumbers(string $password, int $count): string
+    {
+        $numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $passwordArray = mb_str_split($password);
+
+        $numberCount = max(1, floor($count / 2));
+
+        for ($i = 0; $i < $numberCount; $i++) {
+            $randomNumber = $numbers[array_rand($numbers)];
+            $randomPosition = random_int(1, count($passwordArray) - 2);
+            array_splice($passwordArray, $randomPosition, 0, $randomNumber);
+        }
+
+        return implode('', $passwordArray);
+    }
+
     public static function checkWordsToAdd($wordsToAdd, $isSpanish): array
     {
         if ($isSpanish) {
@@ -42,7 +57,7 @@ class PasswordHelper
 
         $data = [];
         foreach ($wordsToAdd as $word) {
-            if (!in_array($word, $existingWords)) {
+            if (! in_array($word, $existingWords)) {
                 $data[] = ['word' => $word];  // Prepara el array para la inserción
             }
         }
@@ -59,7 +74,7 @@ class PasswordHelper
         $file = $isSpanish ? 'words_spanish.txt' : 'words_english.txt';
         $filePath = base_path($file);
 
-        if (!file_exists($filePath)) {
+        if (! file_exists($filePath)) {
             throw new Exception('File not found');
         }
 
@@ -68,7 +83,7 @@ class PasswordHelper
 
         foreach ($fileContents as $line) {
             $word = trim($line);
-            if (!empty($word)) {
+            if (! empty($word)) {
                 $wordsSet[] = $word;  // Cambiar a un array simple
             }
         }
@@ -96,7 +111,7 @@ class PasswordHelper
         return [
             'status' => true,
             'message' => 'Words uploaded successfully',
-            'totalAdded' => $totalAdded
+            'totalAdded' => $totalAdded,
         ];
     }
 
@@ -137,11 +152,12 @@ class PasswordHelper
         foreach ($units as $data) {
             if ($seconds >= $data['divider']) {
                 $value = intval($seconds / $data['divider']);
-                return $value === 1 ? "1 " . $data['singular'] : "$value " . $data['plural'];
+
+                return $value === 1 ? '1 '.$data['singular'] : "$value ".$data['plural'];
             }
         }
 
-        return $seconds . ($isSpanish ? ' segundos' : ' seconds');
+        return $seconds.($isSpanish ? ' segundos' : ' seconds');
     }
 
     private static function formatLargeTime($years, $isSpanish): string
@@ -154,23 +170,24 @@ class PasswordHelper
             'millions' => [
                 'singular' => $isSpanish ? 'millón de años' : 'million of years',
                 'plural' => $isSpanish ? 'millones de años' : 'millions of years',
-                'divider' => 1e6
+                'divider' => 1e6,
             ],
             'years' => [
                 'singular' => $isSpanish ? 'año' : 'year',
                 'plural' => $isSpanish ? 'años' : 'years',
-                'divider' => 1
+                'divider' => 1,
             ],
         ];
 
         foreach ($units as $data) {
             if ($years >= $data['divider']) {
                 $value = intval($years / $data['divider']);
-                return $value === 1 ? "1 " . $data['singular'] : "$value " . $data['plural'];
+
+                return $value === 1 ? '1 '.$data['singular'] : "$value ".$data['plural'];
             }
         }
 
-        return $years . ($isSpanish ? ' años' : ' years');
+        return $years.($isSpanish ? ' años' : ' years');
     }
 
     private static function formatTime($seconds, $isSpanish): string
@@ -185,10 +202,11 @@ class PasswordHelper
 
     public static function calculateStrength($password, $isSpanish): string
     {
-        $zxcvbn = new Zxcvbn();
+        $zxcvbn = new Zxcvbn;
         $passwordStrength = $zxcvbn->passwordStrength($password);
 
         $timeToCrackSec = $passwordStrength['crack_times_seconds']['offline_fast_hashing_1e10_per_second'];
+
         return self::formatTime($timeToCrackSec, $isSpanish);
     }
 }

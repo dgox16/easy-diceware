@@ -17,8 +17,8 @@ export const PasswordForm = () => {
 
 	return (
 		<div className="flex justify-center mt-7 sm:mt-10 mx-5">
-			<div className="grid grid-cols-2 gap-6 sm:gap-8 w-[600px]">
-				<div className="flex-col col-span-2 sm:col-span-1 flex text-center">
+			<div className="grid grid-cols-3 gap-6 sm:gap-16 w-[700px]">
+				<div className="flex-col col-span-3 sm:col-span-1 flex text-center">
 					<Label
 						htmlFor="numberWords"
 						className="mb-2 sm:mb-5 font-semibold text-xs sm:text-base"
@@ -41,7 +41,39 @@ export const PasswordForm = () => {
 						}
 					/>
 				</div>
-				<div className="flex-col col-span-2 sm:col-span-1 sm:flex text-center justify-center">
+				<div className="flex-col col-span-3 sm:col-span-1 sm:flex text-center justify-center">
+					<Label
+						htmlFor="numbersPassword"
+						className="mb-5 font-semibold text-xs sm:text-base"
+					>
+						{isSpanish
+							? "¿Quieres incluir números?"
+							: "Want to include numbers?"}
+					</Label>
+					<Select
+						onValueChange={(value) =>
+							changeFormGeneratePassword("withNumbers", value === "true")
+						}
+					>
+						<SelectTrigger
+							className="text-sm sm:text-base mt-3 sm:mt-0 w-3/4 mx-auto sm:mx-0 sm:w-full"
+							aria-label="numbersPassword"
+						>
+							<SelectValue
+								placeholder={isSpanish ? "Selecciona..." : "Select..."}
+							/>
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem className="text-xs sm:text-base" value="true">
+								{isSpanish ? "Si" : "Yes"}
+							</SelectItem>
+							<SelectItem className="text-xs sm:text-base" value="false">
+								No
+							</SelectItem>
+						</SelectContent>
+					</Select>
+				</div>
+				<div className="flex-col col-span-3 sm:col-span-1 sm:flex text-center justify-center">
 					<Label
 						htmlFor="typePassword"
 						className="mb-5 font-semibold text-xs sm:text-base"
@@ -58,11 +90,7 @@ export const PasswordForm = () => {
 							aria-label="typePassword"
 						>
 							<SelectValue
-								placeholder={
-									isSpanish
-										? "Selecciona tu delimitador"
-										: "Select your delimiter"
-								}
+								placeholder={isSpanish ? "Selecciona..." : "Select..."}
 							/>
 						</SelectTrigger>
 						<SelectContent>
