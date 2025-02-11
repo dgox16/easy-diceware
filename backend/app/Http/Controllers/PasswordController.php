@@ -54,20 +54,15 @@ class PasswordController extends Controller
 
             $wordModel = $isSpanish ? new SpanishWord : new EnglishWord;
 
-            $wordList = collect();
-
-            foreach (DB::cursor("
+            $wordList = DB::select("
                 SELECT word
                 FROM (
                     SELECT word FROM {$wordModel->getTable()} TABLESAMPLE BERNOULLI(1)
                 ) AS subquery
                 ORDER BY RANDOM()
                 LIMIT ?
-            ", [$count]) as $row) {
-                $wordList->push($row->word);
-            }
+            ", [$count]);
 
-            $password = PasswordHelper::addDelimiters($wordList, $request->type);
             $wordList = collect($wordList)->pluck('word')->toArray();
 
             $password = PasswordHelper::addDelimiters(collect($wordList), $request->type);
