@@ -2,6 +2,7 @@ export interface GeneratePasswordRequest {
 	count: number;
 	type: string;
 	isSpanish: boolean;
+	withNumbers: boolean;
 }
 
 export interface GeneratePasswordResponse {

@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
  * @property mixed $count
  * @property mixed $isSpanish
  * @property mixed $type
+ * @property mixed $withNumbers
  */
 class GeneratePasswordRequest extends FormRequest
 {
@@ -30,6 +31,7 @@ class GeneratePasswordRequest extends FormRequest
             'count' => 'required|integer|min:1|max:20',
             'type' => [Rule::enum(TypePassword::class)],
             'isSpanish' => 'required|boolean',
+            'withNumbers' => 'required|boolean',
         ];
     }
 }

@@ -7,6 +7,7 @@ export const useGeneratePasswordStore = create<GeneratePasswordState>(
 			count: 4,
 			type: "space",
 			isSpanish: true,
+			withNumbers: false,
 		},
 		changeFormGeneratePassword: (name, value) =>
 			set((state) => ({
