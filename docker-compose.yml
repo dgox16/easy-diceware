@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    image: ghcr.io/dgox16/easy-diceware-frontend:latest
+    container_name: easy-diceware-frontend-container
+    restart: unless-stopped
+    ports:
+      - "8003:80"
+
+  api:
+    build: ./api
+    image: ghcr.io/dgox16/easy-diceware-api:latest
+    container_name: easy-diceware-api-container
+    restart: unless-stopped
+    ports:
+      - "8004:9000"
+    volumes:
+      - api_storage:/var/www/storage
+    depends_on:
+      - db
+    env_file:
+      - ./api/.env.produccion
+
+  db:
+    image: postgres:16-alpine
+    container_name: easy-diceware-db-container
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env.db
+
+volumes:
+  postgres_data:
+  api_storage:
