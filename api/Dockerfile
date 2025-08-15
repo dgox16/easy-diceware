@@ -14,8 +14,6 @@ RUN docker-php-ext-install pdo pdo_pgsql
 
 COPY --from=builder /app .
 
-COPY words_spanish.txt words_english.txt ./
-
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 9000
