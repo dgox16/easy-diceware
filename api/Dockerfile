@@ -12,5 +12,6 @@ COPY --from=vendor /app/vendor ./vendor
 COPY . .
 RUN apk add --no-cache postgresql-dev
 RUN docker-php-ext-install pdo pdo_pgsql
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN mkdir -p /var/www/storage /var/www/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 EXPOSE 9000
