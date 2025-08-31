@@ -1,9 +1,8 @@
 FROM composer:2.8 AS vendor
 
 WORKDIR /app
-COPY database/ database/
 COPY composer.json composer.lock ./
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-dev --optimize-autoloader --no-scripts
 
 
 FROM php:8.4-fpm-alpine
