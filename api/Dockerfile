@@ -7,7 +7,7 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader --no-script
 
 FROM php:8.4-fpm-alpine
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 COPY --from=vendor /app/vendor ./vendor
 COPY . .
 RUN apk add --no-cache postgresql-dev
