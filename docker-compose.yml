@@ -24,7 +24,7 @@ services:
       - ./api/.env.produccion
 
   api_nginx:
-    image: nginx:alpine
+    image: nginx:1.29.1-alpine
     container_name: easy-diceware-api-nginx
     restart: unless-stopped
     ports:
@@ -35,7 +35,7 @@ services:
       - api
 
   db:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     container_name: easy-diceware-db-container
     restart: unless-stopped
     volumes:
