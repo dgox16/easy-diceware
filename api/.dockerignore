@@ -25,3 +25,4 @@ phpunit.xml
 api_requests.http
 words_spanish.txt
 words_english.txt
+scriptsDb.sh
