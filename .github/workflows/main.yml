@@ -19,7 +19,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      # --- Construye y sube la imagen del FRONTEND ---
       - name: Build and push Frontend image
         uses: docker/build-push-action@v5
         with:
@@ -29,7 +28,6 @@ jobs:
           build-args: |
             VITE_API_URL=${{ vars.VITE_API_URL }}
 
-      # --- Construye y sube la imagen del BACKEND ---
       - name: Build and push API image
         uses: docker/build-push-action@v5
         with:
@@ -37,7 +35,6 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository }}-api:latest
 
-      # --- Despliega en el VPS ---
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -47,7 +44,16 @@ jobs:
           script: |
             cd ~/aplicaciones/easy-diceware
             git pull origin main
-            # docker-compose pull bajará AMBAS imágenes nuevas
             docker compose pull
             docker compose up -d --force-recreate
             docker image prune -af
+
+      - name: Run migrations
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/aplicaciones/easy-diceware
+            docker compose exec -T api php artisan migrate --force
