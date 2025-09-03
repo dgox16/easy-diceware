@@ -24,6 +24,7 @@ services:
     volumes:
       - ./api:/var/www
       - api_storage_easy_diceware:/var/www/storage
+      - api_cache_easy_diceware:/var/www/bootstrap/cache
     expose:
       - "9000"
     depends_on:
@@ -57,4 +58,4 @@ services:
 volumes:
   postgres_data_easy_diceware:
   api_storage_easy_diceware:
-
+  api_cache_easy_diceware:
